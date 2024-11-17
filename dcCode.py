@@ -2,58 +2,78 @@ import os
 import shutil
 from datetime import datetime, timedelta
 
+file_directories = {}
+if not os.path.exists("FileDirectories.txt"):
+    file_directories = {
+        'photo': 'photos',
+        'video': 'videos',
+        'text': 'photos',
+        'audio': 'audios',
+        'archive': 'archives',
+        'executable': 'executables',
+        'code': 'codes',
+        'else': 'else'
+    }
+    with open("FileDirectories.txt", "w+", encoding="UTF-8") as directories:
+        keys = list(file_directories.keys())
+        values = list(file_directories.values())
+        for i in range(len(keys)):
+            directories.write(f"{keys[i]}|{values[i]}\n")
+else:
+    with open("FileDirectories.txt", "r", encoding="UTF-8") as directories:
+        lines = directories.readlines()
+        keys = []
+        values = []
+        for i in lines:
+            values.append(i[i.find("|") + 1:].rstrip("\n").split())
+            keys.append(i[:i.find("|")])
+        for i in range(len(keys)):
+            file_directories[keys[i]] = values[i]
+
+file_types = {}
+if not os.path.exists("FileTypes.txt"):
+    file_types = {
+        'photo': ['.jpeg', '.jpg', '.png', '.tiff', '.webp', '.svg'],
+        'video': ['.webm', '.mkv', '.flv', '.ogg', '.gif', '.avi', '.wmv', '.mp4', '.m4p', '.m4v'],
+        'text': ['.txt', '.rtf', '.pdf', '.doc', '.docx'],
+        'audio': ['.mp3', '.flac', '.m4a', '.wma', '.aac', '.ec3', '.flp', '.mtm', '.wav'],
+        'archive': ['.zip', '.rar', '.7z', '.pkg', '.z'],
+        'executable': ['.exe', '.apk', '.bat', '.bin', '.msi'],
+        'code': ['.cpp', '.py', '.pyw', '.jar']
+    }
+    with open("FileTypes.txt", "w", encoding="UTF-8") as types:
+        keys = list(file_types.keys())
+        values = list(file_types.values())
+        new_values = values
+        buffer_values = ""
+        for i in range(len(new_values)):
+            for value in new_values:
+                for file_type in value:
+                    buffer_values = buffer_values + f"{file_type} "
+                new_values.pop(0)
+                types.write(f"{keys[i]}|{buffer_values}\n")
+                buffer_values = ""
+                break
+else:
+    with open("FileTypes.txt", "r", encoding="UTF-8") as directories:
+        lines = directories.readlines()
+        keys = []
+        values = []
+        for i in lines:
+            values.append(i[i.find("|") + 1:].rstrip("\n").split())
+            keys.append(i[:i.find("|")])
+        for i in range(len(keys)):
+            file_types[keys[i]] = values[i]
+
 
 class Cleaner:
     def __init__(self):
         """Класс для переноса, удаления и сортировки файлов"""
-        self.file_directories = {}
-        self.file_types = {}
-        if not os.path.exists("FileDirectories.txt"):
-            self.file_directories = {
-                'photo': ['photos'],
-                'video': ['videos'],
-                'text': ['photos'],
-                'audio': ['audios'],
-                'archive': ['archives'],
-                'executable': ['executables'],
-                'code': ['codes'],
-                'else': ['else']
-            }
-        else:
-            with open("FileDirectories.txt", "w", encoding="UTF-8") as directories:
-                lines = directories.readlines()
-                keys = []
-                values = []
-                for i in lines:
-                    values.append(i[i.find("|") + 1:].rstrip("\n").split())
-                    keys.append(i[:i.find("|")])
-                for i in range(len(keys)):
-                    self.file_directories[keys[i]] = values[i]
-        if not os.path.exists("FileTypes.txt"):
-            self.file_types = {
-                'photo': ['.jpeg', '.jpg', '.png', '.tiff', '.webp', '.svg'],
-                'video': ['.webm', '.mkv', '.flv', '.ogg', '.gif', '.avi', '.wmv', '.mp4', '.m4p', '.m4v'],
-                'text': ['.txt', '.rtf', '.pdf', '.doc', '.docx'],
-                'audio': ['.mp3', '.flac', '.m4a', '.wma', '.aac', '.ec3', '.flp', '.mtm', '.wav'],
-                'archive': ['.zip', '.rar', '.7z', '.pkg', '.z'],
-                'executable': ['.exe', '.apk', '.bat', '.bin', '.msi'],
-                'code': ['.cpp', '.py', '.pyw', '.jar']
-            }
-        else:
-            with open("FileTypes.txt", "w", encoding="UTF-8") as directories:
-                lines = directories.readlines()
-                keys = []
-                values = []
-                for i in lines:
-                    values.append(i[i.find("|") + 1:].rstrip("\n").split())
-                    keys.append(i[:i.find("|")])
-                for i in range(len(keys)):
-                    self.file_types[keys[i]] = values[i]
 
     def get_file_type(self, file_path):
         """Выводит тип файла, на вход принимает его путь"""
         input_file = os.path.splitext(file_path)[1]
-        for name, file_type in self.file_types.items():
+        for name, file_type in file_types.items():
             if input_file in file_type:
                 return name
 
@@ -70,7 +90,7 @@ class Cleaner:
     def move_file(self, file_path, final_destination="", make_log=True):
         """Переносит файл в соответсвующую его типу файла папку или по указанному пути"""
         if final_destination == "":
-            final_destination = self.file_directories[self.get_file_type(file_path)][0]
+            final_destination = file_directories[self.get_file_type(file_path)][0]
         if os.path.exists(file_path) and os.path.exists(final_destination):
             shutil.move(file_path, final_destination)
             if make_log:
@@ -150,7 +170,7 @@ class Cleaner:
                 dict_values.append(dict_line[dict_line.find("|") + 1:].rstrip("\n").split())
                 dict_keys.append(dict_line[:dict_line.find("|")])
             for dict_line in range(len(dict_keys)):
-                self.file_types[dict_keys[dict_line]] = dict_values[dict_line]
+                file_types[dict_keys[dict_line]] = dict_values[dict_line]
 
     def update_file_directories(self, dir_list):
         """Обновляет словарь директорий файлов по запросу пользователя"""
@@ -162,15 +182,16 @@ class Cleaner:
                 dict_values.append(dict_line[dict_line.find("|") + 1:].rstrip("\n").split())
                 dict_keys.append(dict_line[:dict_line.find("|")])
             for dict_line in range(len(dict_keys)):
-                self.file_directories[dict_keys[dict_line]] = dict_values[dict_line]
+                file_directories[dict_keys[dict_line]] = dict_values[dict_line]
 
     def return_file_directories(self):
         """Выводит словарь директорий файлов"""
-        return self.file_directories
+        return file_directories
 
     def return_file_types(self):
         """Выводит словарь типов файлов"""
-        return self.file_types
+        return file_types
+
 
 # TODO: в коде
 #   1. Добавить создание папок из файла с директориями

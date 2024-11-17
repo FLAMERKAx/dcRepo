@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Directories</class>
+ <widget class="QMainWindow" name="Directories">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
+    <width>523</width>
     <height>819</height>
    </rect>
   </property>
@@ -485,7 +485,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="simple_checkbox">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -515,6 +515,9 @@
       <width>221</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
     <property name="plainText">
      <string/>
@@ -567,11 +570,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="photo_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -593,7 +599,7 @@
      <string>Фотографии:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_4">
+   <widget class="QPlainTextEdit" name="photo_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -605,11 +611,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_5">
+   <widget class="QPlainTextEdit" name="video_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -621,11 +630,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="video_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -647,7 +659,7 @@
      <string>Видео:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_6">
+   <widget class="QPlainTextEdit" name="text_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -659,11 +671,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="text_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -685,7 +700,7 @@
      <string>Текст:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_7">
+   <widget class="QPlainTextEdit" name="audio_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -697,11 +712,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="audio_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -723,7 +741,7 @@
      <string>Аудио:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_8">
+   <widget class="QPlainTextEdit" name="archive_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -735,11 +753,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_9">
+   <widget class="QLabel" name="archive_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -761,7 +782,7 @@
      <string>Архивы:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_9">
+   <widget class="QPlainTextEdit" name="executable_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -773,11 +794,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_10">
+   <widget class="QLabel" name="executable_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -799,7 +823,7 @@
      <string>Программы:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_10">
+   <widget class="QPlainTextEdit" name="else_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -811,11 +835,14 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_11">
+   <widget class="QLabel" name="else_label">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -837,220 +864,17 @@
      <string>Прочее:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>80</y>
-      <width>131</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Строго в формате:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>100</y>
-      <width>241</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Например: &quot;C:\Users\FLAMERKA\Desktop&quot;</string>
-    </property>
-   </widget>
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>120</y>
+      <y>80</y>
       <width>20</width>
-      <height>681</height>
+      <height>771</height>
      </rect>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>200</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>200</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>270</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>340</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>410</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_6">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>480</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_7">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>550</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_8">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>620</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_9">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>690</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_10">
@@ -1091,44 +915,303 @@
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="save_all_button">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>720</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Сохранить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>200</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="photo_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>270</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="video_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>340</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="text_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>410</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="audio_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>480</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="archive_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>550</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="executable_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>620</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>311</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>При сложной сортировке, каждый тип
+файлов перейдет в определенную 
+директорию. Но, если включить простую 
+сортировку внутри папки, в которой было 
+ указано&quot;Куда&quot;создадутся 7 папок 
+под все необходимые типы файлов
+ из-за чего вам не придется указывать 
+их вручнуюю</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="else_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>690</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>200</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line_2</zorder>
-   <zorder>checkBox</zorder>
+   <zorder>simple_checkbox</zorder>
    <zorder>plainTextEdit</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
    <zorder>plainTextEdit_2</zorder>
-   <zorder>label_5</zorder>
-   <zorder>plainTextEdit_4</zorder>
-   <zorder>plainTextEdit_5</zorder>
-   <zorder>label_6</zorder>
-   <zorder>plainTextEdit_6</zorder>
-   <zorder>label_7</zorder>
-   <zorder>plainTextEdit_7</zorder>
-   <zorder>label_8</zorder>
-   <zorder>plainTextEdit_8</zorder>
-   <zorder>label_9</zorder>
-   <zorder>plainTextEdit_9</zorder>
-   <zorder>label_10</zorder>
-   <zorder>plainTextEdit_10</zorder>
-   <zorder>label_11</zorder>
-   <zorder>label_4</zorder>
-   <zorder>label_12</zorder>
+   <zorder>photo_label</zorder>
+   <zorder>photo_text</zorder>
+   <zorder>video_text</zorder>
+   <zorder>video_label</zorder>
+   <zorder>text_text</zorder>
+   <zorder>text_label</zorder>
+   <zorder>audio_text</zorder>
+   <zorder>audio_label</zorder>
+   <zorder>archive_text</zorder>
+   <zorder>archive_label</zorder>
+   <zorder>executable_text</zorder>
+   <zorder>executable_label</zorder>
+   <zorder>else_text</zorder>
+   <zorder>else_label</zorder>
    <zorder>line_3</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>pushButton_5</zorder>
-   <zorder>pushButton_6</zorder>
-   <zorder>pushButton_7</zorder>
-   <zorder>pushButton_8</zorder>
-   <zorder>pushButton_9</zorder>
    <zorder>pushButton_10</zorder>
    <zorder>checkBox_2</zorder>
+   <zorder>save_all_button</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>photo_button</zorder>
+   <zorder>video_button</zorder>
+   <zorder>text_button</zorder>
+   <zorder>audio_button</zorder>
+   <zorder>archive_button</zorder>
+   <zorder>executable_button</zorder>
+   <zorder>label_19</zorder>
+   <zorder>else_button</zorder>
+   <zorder>pushButton_5</zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

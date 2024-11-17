@@ -1,4 +1,4 @@
-photo|D:\photos
+photo|photos
 video|videos
 text|photos
 audio|audios
