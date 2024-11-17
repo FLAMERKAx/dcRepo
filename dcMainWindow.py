@@ -11,6 +11,7 @@ class DesktopCleaner(QMainWindow):
         super().__init__()
         uic.loadUi("Main.ui", self)
         self.initUI()
+        print("bebra :)")
 
     def initUI(self):
         self.setFixedSize(900, 700)
