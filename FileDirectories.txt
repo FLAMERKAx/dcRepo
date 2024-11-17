@@ -1,0 +1,8 @@
+photo|D:\photos
+video|videos
+text|photos
+audio|audios
+archive|archives
+executable|executables
+code|codes
+else|else
