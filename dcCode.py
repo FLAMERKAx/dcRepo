@@ -136,7 +136,7 @@ class Cleaner:
                     self.move_file(file_path, destination_path, make_log=False)
                     self.save_log("Undo", file_path)
 
-    def move_folder(self, folder_path, destination_folder=""):
+    def move_folder(self, folder_path, destination_folder="", simple_sort=False):
         """Перемещает файлы из одной папки в другую"""
         if destination_folder == "":
             for folder, subfolder, files in os.walk(folder_path):
@@ -192,28 +192,52 @@ class Cleaner:
         """Выводит словарь типов файлов"""
         return file_types
 
+    def reset_file_directories(self):
+        """Сбрасывает файл с директориями файлов до базовых значений"""
+        new_file_directories = {
+            'photo': 'photos',
+            'video': 'videos',
+            'text': 'photos',
+            'audio': 'audios',
+            'archive': 'archives',
+            'executable': 'executables',
+            'code': 'codes',
+            'else': 'else'
+        }
+        with open("FileDirectories.txt", "w+", encoding="UTF-8") as directories:
+            keys = list(new_file_directories.keys())
+            values = list(new_file_directories.values())
+            for i in range(len(keys)):
+                directories.write(f"{keys[i]}|{values[i]}\n")
 
-# TODO: в коде
-#   1. Добавить создание папок из файла с директориями
-#   2. Добавить создание одной папки
-#   3. Добавить удаление папки без файлов
-#   4. Добавить CSV файл(возможно со статистикой)
-#   5. Добавить сортировку по размеру или времени создания или по пользовательскому условию
-#   (один тип данных, определенное количество, не все файлы сразу)
-#   6. Инструкции быстрого доступа
-#   7. Добавить условия для отката действий
-#   8. Добавить функционал для else типа файла в move_file
-#   9. Добавить создание одной папки "Очистка от {Дата}" в которой будут все папки
-#   10. Добавить возможность переименовывать файлы
-#   11. Добавить возможность сделать для каждой папки создать свое название
-#   14. json типа?
+    def reset_file_types(self):
+        """Сбрасывает файл с типами файлов до базовых значений"""
+        new_file_types = {
+            'photo': ['.jpeg', '.jpg', '.png', '.tiff', '.webp', '.svg'],
+            'video': ['.webm', '.mkv', '.flv', '.ogg', '.gif', '.avi', '.wmv', '.mp4', '.m4p', '.m4v'],
+            'text': ['.txt', '.rtf', '.pdf', '.doc', '.docx'],
+            'audio': ['.mp3', '.flac', '.m4a', '.wma', '.aac', '.ec3', '.flp', '.mtm', '.wav'],
+            'archive': ['.zip', '.rar', '.7z', '.pkg', '.z'],
+            'executable': ['.exe', '.apk', '.bat', '.bin', '.msi'],
+            'code': ['.cpp', '.py', '.pyw', '.jar']
+        }
+        with open("FileTypes.txt", "w", encoding="UTF-8") as types:
+            keys = list(new_file_types.keys())
+            values = list(new_file_types.values())
+            new_values = values
+            buffer_values = ""
+            for i in range(len(new_values)):
+                for value in new_values:
+                    for file_type in value:
+                        buffer_values = buffer_values + f"{file_type} "
+                    new_values.pop(0)
+                    types.write(f"{keys[i]}|{buffer_values}\n")
+                    buffer_values = ""
+                    break
 
-# TODO: В дизайнере
-#   1. Добавить диалоговое окно для ввода директорий
-#   2. Добавить кнопки для действий(сохранить, отобразить)
-#   3. Добавить на главный экран подсказки, также как и на другие окна
-#   4. Добавить UI для пользовательских сценариев
-#   5. Добавить либо окно либо на главном экране статистику по программе(количество действий и прочее)
-#   6. Добавить возможность менять цвет фона для пользовательского сценария
-#   7. (Каким-то способом) Добавить диалоговое окно с чекбоксами для выбора директорий
-#   8. Добавить выбор условий и настройки текущей очистки на главный экран
+    def simple_sort_make_directories(self, where_directory):
+        for el in list(file_directories.keys()):
+            os.mkdir(fr"{where_directory}\{el}")
+
+
+

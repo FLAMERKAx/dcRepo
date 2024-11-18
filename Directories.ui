@@ -507,7 +507,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="from_text">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -523,7 +523,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="from_label">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -542,7 +542,7 @@
      <string>Откуда:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="where_label">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -561,7 +561,7 @@
      <string>Куда:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+   <widget class="QPlainTextEdit" name="where_text">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -830,7 +830,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>650</y>
+      <y>720</y>
       <width>221</width>
       <height>31</height>
      </rect>
@@ -849,7 +849,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>630</y>
+      <y>700</y>
       <width>71</width>
       <height>16</height>
      </rect>
@@ -877,11 +877,14 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="reset_button">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>730</y>
+      <x>350</x>
+      <y>120</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -893,11 +896,11 @@
      <string>Сбросить настройки</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="confirm_checkbox">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>700</y>
+      <x>350</x>
+      <y>90</y>
       <width>151</width>
       <height>17</height>
      </rect>
@@ -918,8 +921,8 @@
    <widget class="QPushButton" name="save_all_button">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>720</y>
+      <x>30</x>
+      <y>710</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -936,7 +939,7 @@
      <string>Сохранить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="where_button">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -1137,7 +1140,7 @@
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>690</y>
+      <y>760</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -1154,7 +1157,7 @@
      <string>Открыть Папку</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="from_button">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -1175,14 +1178,101 @@
      <string>Открыть Папку</string>
     </property>
    </widget>
+   <widget class="QLabel" name="confirm_label">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>110</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Нажмите Подтвердить!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="code_button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>690</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Открыть Папку</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="code_label">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>630</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Код:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="code_text">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>650</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string/>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line_2</zorder>
    <zorder>simple_checkbox</zorder>
-   <zorder>plainTextEdit</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_3</zorder>
-   <zorder>plainTextEdit_2</zorder>
+   <zorder>from_text</zorder>
+   <zorder>from_label</zorder>
+   <zorder>where_label</zorder>
+   <zorder>where_text</zorder>
    <zorder>photo_label</zorder>
    <zorder>photo_text</zorder>
    <zorder>video_text</zorder>
@@ -1198,10 +1288,10 @@
    <zorder>else_text</zorder>
    <zorder>else_label</zorder>
    <zorder>line_3</zorder>
-   <zorder>pushButton_10</zorder>
-   <zorder>checkBox_2</zorder>
+   <zorder>reset_button</zorder>
+   <zorder>confirm_checkbox</zorder>
    <zorder>save_all_button</zorder>
-   <zorder>pushButton_4</zorder>
+   <zorder>where_button</zorder>
    <zorder>photo_button</zorder>
    <zorder>video_button</zorder>
    <zorder>text_button</zorder>
@@ -1210,7 +1300,11 @@
    <zorder>executable_button</zorder>
    <zorder>label_19</zorder>
    <zorder>else_button</zorder>
-   <zorder>pushButton_5</zorder>
+   <zorder>from_button</zorder>
+   <zorder>confirm_label</zorder>
+   <zorder>code_button</zorder>
+   <zorder>code_label</zorder>
+   <zorder>code_text</zorder>
   </widget>
  </widget>
  <resources/>
