@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>899</width>
-    <height>702</height>
+    <height>691</height>
    </rect>
   </property>
   <property name="palette">
@@ -454,7 +454,7 @@
     <property name="geometry">
      <rect>
       <x>-190</x>
-      <y>0</y>
+      <y>-20</y>
       <width>481</width>
       <height>1021</height>
      </rect>
@@ -581,11 +581,11 @@ rgb(108, 108, 108)</string>
 Сценарии</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="clean_button">
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>560</y>
+      <y>550</y>
       <width>501</width>
       <height>101</height>
      </rect>
@@ -648,6 +648,52 @@ rgb(108, 108, 108)</string>
      <number>1</number>
     </property>
    </widget>
+   <widget class="QCheckBox" name="simple_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>520</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Простая сортировка</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="undo_button">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>100</y>
+      <width>391</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>ОТКАТИТЬ ПОСЛЕДНЕЕ ДЕЙСТВИЕ</string>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line</zorder>
@@ -657,8 +703,10 @@ rgb(108, 108, 108)</string>
    <zorder>directories_button</zorder>
    <zorder>types_button</zorder>
    <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
+   <zorder>clean_button</zorder>
    <zorder>spinBox</zorder>
+   <zorder>simple_checkbox</zorder>
+   <zorder>undo_button</zorder>
   </widget>
  </widget>
  <resources/>

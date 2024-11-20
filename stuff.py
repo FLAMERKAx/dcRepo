@@ -1,14 +1,8 @@
-import os
+import dcCode
 
-new_file_directories = {
-    'photo': 'photos',
-    'video': 'videos',
-    'text': 'photos',
-    'audio': 'audios',
-    'archive': 'archives',
-    'executable': 'executables',
-    'code': 'codes',
-    'else': 'else'
-}
-
-print(list(new_file_directories.keys())[1])
+dc = dcCode.Cleaner()
+try:
+    final_destination = dcCode.file_directories[dc.get_file_type(fr"D:\test\1.ai")][0]
+except KeyError:
+    final_destination = dcCode.file_directories["else"]
+print(final_destination)

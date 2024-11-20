@@ -1,0 +1,2 @@
+from|D:\test
+where|D:\test\test2

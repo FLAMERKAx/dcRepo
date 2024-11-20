@@ -1,9 +1,11 @@
+import os.path
 import sys
 import traceback
 
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QPushButton, QFileDialog
 from PyQt6.QtWidgets import QMainWindow
+
 from dcCode import Cleaner as dc
 
 
@@ -18,12 +20,25 @@ class DesktopCleaner(QMainWindow):
         self.types_window = None
         self.directories_window = DesktopDirectories()
         self.types_window = DesktopTypes()
+        self.dc = dc()
 
     def initUI(self):
         self.setFixedSize(900, 700)
         self.setWindowTitle('DesktopCleaner')
         self.directories_button.clicked.connect(self.open_directories_window)
         self.types_button.clicked.connect(self.open_types_window)
+        self.clean_button.clicked.connect(self.clean)
+
+    def clean(self):
+        print(self.dc.return_simple_file_directories())
+        if self.simple_checkbox.isChecked():
+            if not os.path.exists(fr"{list(self.dc.return_simple_directories().values())[1]}\photo"):
+                self.dc.make_simple_sort_directories(list(self.dc.return_simple_directories().values())[1])
+            self.dc.move_folder(list(self.dc.return_simple_directories().values())[0], simple=True)
+
+    # def undo(self):
+    #     self.dc.undo_move()
+
 
     def open_directories_window(self):
         if self.directories_window is None or not self.directories_window.isVisible():
@@ -59,6 +74,7 @@ class DesktopDirectories(QMainWindow):
         self.simple_checkbox.clicked.connect(self.simple_sort_checkbox)
 
         self.reset_button.clicked.connect(self.reset_file_directories)
+        self.save_all_button.clicked.connect(self.save_all_directories)
 
         self.where_button.clicked.connect(lambda: self.where_text.setPlainText(self.get_directory()))
         self.from_button.clicked.connect(lambda: self.from_text.setPlainText(self.get_directory()))
@@ -146,32 +162,57 @@ class DesktopDirectories(QMainWindow):
             self.where_text.setEnabled(True)
 
     def get_directory(self):
-        return QFileDialog.getExistingDirectory(self)
+        directory = QFileDialog.getExistingDirectory(self)
+        new_directory = ""
+        for i in directory:
+            if i != "/":
+                new_directory += i
+            else:
+                new_directory += "\\"
+        return new_directory
 
     def reset_file_directories(self):
         file_directories = self.dc.return_file_directories()
+        simple_directories = self.dc.return_simple_directories()
         if self.confirm_checkbox.isChecked():
-            self.confirm_label.hide
+            self.confirm_label.hide()
             # self.dc.reset_file_directories()
-            self.from_text.setPlainText("")
-            self.where_text.setPlainText("")
+            keys = list(file_directories.keys())
+            simple_values = list(simple_directories.values())
+            self.from_text.setPlainText(simple_values[0])
+            self.where_text.setPlainText(simple_values[1])
 
-            self.photo_text.setPlainText(list(file_directories.keys())[0])
-            self.video_text.setPlainText(list(file_directories.keys())[1])
-            self.text_text.setPlainText(list(file_directories.keys())[2])
-            self.audio_text.setPlainText(list(file_directories.keys())[3])
-            self.archive_text.setPlainText(list(file_directories.keys())[4])
-            self.executable_text.setPlainText(list(file_directories.keys())[5])
-            self.code_text.setPlainText(list(file_directories.keys())[6])
-            self.else_text.setPlainText(list(file_directories.keys())[7])
+            self.photo_text.setPlainText(keys[0])
+            self.video_text.setPlainText(keys[1])
+            self.text_text.setPlainText(keys[2])
+            self.audio_text.setPlainText(keys[3])
+            self.archive_text.setPlainText(keys[4])
+            self.executable_text.setPlainText(keys[5])
+            self.code_text.setPlainText(keys[6])
+            self.else_text.setPlainText(keys[7])
         else:
             self.confirm_label.show()
 
     def save_all_directories(self):
-        new_directories = {
-            "photo":"da"
-        }
-        self.dc.update_file_directories(new_directories)
+        if not self.simple_checkbox.isChecked():
+            new_directories = {
+                "photo": self.photo_text.toPlainText(),
+                "video": self.video_text.toPlainText(),
+                "text": self.text_text.toPlainText(),
+                "audio": self.audio_text.toPlainText(),
+                "archive": self.archive_text.toPlainText(),
+                "executable": self.executable_text.toPlainText(),
+                "code": self.code_text.toPlainText(),
+                "else": self.else_text.toPlainText(),
+            }
+            self.dc.update_file_directories(new_directories)
+        else:
+            new_directories = {
+                "from": self.from_text.toPlainText(),
+                "where": self.where_text.toPlainText()
+            }
+            self.dc.update_simple_sort(new_directories)
+
 
 
 class DesktopTypes(QMainWindow):
