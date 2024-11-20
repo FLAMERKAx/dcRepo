@@ -1,52 +1,27 @@
-13.11.2024 21:44:50||Delete||D:\aboba.txt -> D:\bebra
-13.11.2024 21:44:55||Delete||D:\aboba.txt -> D:\bebra
-13.11.2024 21:45:05||Delete||D:\aboba.txt -> D:\bebra
-13.11.2024 21:45:05||Delete||D:\aboba.txt -> D:\bebra20.11.2024 21:42:06||FolderMove||
-20.11.2024 21:42:17||FolderMove||
-20.11.2024 21:42:27||FolderMove||
-20.11.2024 21:42:27||FolderMove||
-20.11.2024 21:42:27||FolderMove||
-20.11.2024 22:00:31||Move||D:\test\1.ai->D:\test\test2\else
-20.11.2024 22:00:31||Move||D:\test\1.bak->D:\test\test2\else
-20.11.2024 22:00:31||Move||D:\test\1.pptx->D:\test\test2\else
-20.11.2024 22:00:31||Move||D:\test\1.psd->D:\test\test2\else
-20.11.2024 22:00:31||Move||D:\test\1.veg->D:\test\test2\else
-20.11.2024 22:02:36||Move||D:\test\1.ai->D:\test\test2\else
-20.11.2024 22:02:48||Move||D:\test\1.bak->D:\test\test2\else
-20.11.2024 22:03:21||Move||D:\test\1.pptx->D:\test\test2\else
-20.11.2024 22:03:24||Move||D:\test\1.psd->D:\test\test2\else
-20.11.2024 22:03:31||Move||D:\test\1.veg->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\1.ai->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\1.bak->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\1.pptx->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\1.psd->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\1.veg->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\test2\else\1.ai->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\test2\else\1.bak->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\test2\else\1.pptx->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\test2\else\1.psd->D:\test\test2\else
-20.11.2024 22:07:57||Move||D:\test\test2\else\1.veg->D:\test\test2\else
-20.11.2024 22:07:57||FolderMove||
-20.11.2024 22:08:32||Move||D:\test\test2\else\1.ai->D:\test\test2\else
-20.11.2024 22:08:32||Move||D:\test\test2\else\1.bak->D:\test\test2\else
-20.11.2024 22:08:32||Move||D:\test\test2\else\1.pptx->D:\test\test2\else
-20.11.2024 22:08:32||Move||D:\test\test2\else\1.psd->D:\test\test2\else
-20.11.2024 22:08:32||Move||D:\test\test2\else\1.veg->D:\test\test2\else
-20.11.2024 22:08:32||FolderMove||
-20.11.2024 22:08:38||Move||D:\test\test2\else\1.ai->D:\test\test2\else
-20.11.2024 22:08:38||Move||D:\test\test2\else\1.bak->D:\test\test2\else
-20.11.2024 22:08:38||Move||D:\test\test2\else\1.pptx->D:\test\test2\else
-20.11.2024 22:08:38||Move||D:\test\test2\else\1.psd->D:\test\test2\else
-20.11.2024 22:08:38||Move||D:\test\test2\else\1.veg->D:\test\test2\else
-20.11.2024 22:08:38||FolderMove||
-20.11.2024 22:08:42||Move||D:\test\test2\else\1.ai->D:\test\test2\else
-20.11.2024 22:08:42||Move||D:\test\test2\else\1.bak->D:\test\test2\else
-20.11.2024 22:08:42||Move||D:\test\test2\else\1.pptx->D:\test\test2\else
-20.11.2024 22:08:42||Move||D:\test\test2\else\1.psd->D:\test\test2\else
-20.11.2024 22:08:42||Move||D:\test\test2\else\1.veg->D:\test\test2\else
-20.11.2024 22:08:42||FolderMove||
-20.11.2024 22:11:49||Move||D:\test\1.ai->D:\test\test2\else
-20.11.2024 22:11:49||Move||D:\test\1.bak->D:\test\test2\else
-20.11.2024 22:11:49||Move||D:\test\1.pptx->D:\test\test2\else
-20.11.2024 22:11:49||Move||D:\test\1.psd->D:\test\test2\else
-20.11.2024 22:11:49||Move||D:\test\1.veg->D:\test\test2\else
+21.11.2024 01:25:23||FolderMove||
+||Undo||
+21.11.2024 01:27:24||FolderMove||
+||Undo||
+21.11.2024 01:36:44||FolderMove||
+||Undo||
+21.11.2024 01:37:17||FolderMove||
+.docx->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\executables\1.exe->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\videos\1.gif->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\codes\1.jar->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\photos\1.jpeg->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\photos\1.jpg->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\audios\1.m4a->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\audios\1.mp3->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\videos\1.mp4->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\photos\1.png->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\else\1.pptx->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\else\1.psd->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\archives\1.rar->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\text\1.txt->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\else\1.veg->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\audios\1.wav->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\audios\1.wma->D:\test
+21.11.2024 01:39:31||Undo||D:\test\test2\archives\1.zip->D:\test
+21.11.2024 01:40:44||FolderMove||
+21.11.2024 01:42:34||FolderMove||

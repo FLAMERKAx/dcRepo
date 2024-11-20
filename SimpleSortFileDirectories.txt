@@ -1,6 +1,6 @@
 photo|D:\test\test2\photos
 video|D:\test\test2\videos
-text|D:\test\test2\photos
+text|D:\test\test2\text
 audio|D:\test\test2\audios
 archive|D:\test\test2\archives
 executable|D:\test\test2\executables

@@ -31,7 +31,7 @@ if not os.path.exists("SimpleSortFileDirectories.txt"):
     simple_directories = {
         'photo': fr"{list(simple_directories.values())[1]}\photos",
         'video': fr"{list(simple_directories.values())[1]}\videos",
-        'text': fr"{list(simple_directories.values())[1]}\photos",
+        'text': fr"{list(simple_directories.values())[1]}\text",
         'audio': fr"{list(simple_directories.values())[1]}\audios",
         'archive': fr"{list(simple_directories.values())[1]}\archives",
         'executable': fr"{list(simple_directories.values())[1]}\executables",
@@ -59,10 +59,10 @@ if not os.path.exists("FileDirectories.txt"):
     file_directories = {
         'photo': 'photos',
         'video': 'videos',
-        'text': 'photos',
+        'text': 'text',
         'audio': 'audios',
         'archive': 'archives',
-        'executable': 'executables',
+        'executables': 'executables',
         'code': 'codes',
         'else': 'else'
     }
@@ -122,6 +122,7 @@ class Cleaner:
     def __init__(self):
         """Класс для переноса, удаления и сортировки файлов"""
         self.desktop = DESKTOP
+        self.stop = False
 
     def get_file_type(self, file_path):
         """Выводит тип файла, на вход принимает его путь"""
@@ -145,7 +146,7 @@ class Cleaner:
         """Переносит файл в соответсвующую его типу файла папку или по указанному пути"""
         if simple_sort:
             try:
-                final_destination = simple_sort_file_directories[self.get_file_type(file_path)][0]
+                final_destination = simple_sort_file_directories[self.get_file_type(file_path)]
             except KeyError:
                 final_destination = simple_sort_file_directories["else"]
         else:
@@ -156,22 +157,25 @@ class Cleaner:
         if os.path.exists(file_path) and os.path.exists(final_destination):
             try:
                 shutil.move(file_path, final_destination)
+                if make_log:
+                    self.save_log("Move", f"{file_path}->{final_destination}")
             except shutil.Error:
-                file_path = file_path + "(copy)"
-                shutil.move(file_path, final_destination)
-            if make_log:
-                self.save_log("Move", f"{file_path}->{final_destination}")
+                self.stop = True
             return True
         else:
             return False
 
     def move_folder(self, folder_path, simple=False):
         """Перемещает файлы из одной папки в другую"""
+        self.save_log("FolderMove")
         for folder, subfolder, files in os.walk(folder_path):
             for folder_file in files:
-                folder_file = fr"{folder}\{folder_file}"
-                self.move_file(folder_file, simple_sort=simple)
-        self.save_log("FolderMove")
+                if not self.stop:
+                    folder_file = fr"{folder}\{folder_file}"
+                    self.move_file(folder_file, simple_sort=simple)
+                else:
+                    self.stop = False
+                    return True
 
     def delete_file(self, file_path):
         """Удаляет файл по его пути"""
@@ -182,34 +186,45 @@ class Cleaner:
         else:
             return False
 
-    def undo_move(self, date, time_start, time_stop):
+    def undo_move(self):
         """Отменяет все действия в указанном отрезке времени из логов"""
-        with open("logs.txt", "a+", encoding="UTF-8") as log_file:
+        with open("logs.txt", "r", encoding="UTF-8") as log_file:
             logs = log_file.readlines()
-            real_time_start = str(timedelta(seconds=time_start))
-            real_time_stop = str(timedelta(seconds=time_stop))
-            for line in logs:
-                time_start_position = 0
-                if line.find(f"{date} {real_time_start}") != -1:
-                    time_start_position += 1
+            logs.reverse()
+            counter = 0
+            for i in logs:
+                counter += 1
+                if i.split("||")[1] == "FolderMove":
                     break
-                else:
-                    time_start_position += 1
-            for line in logs[time_start_position:]:
-                time_stop_position = 0
-                if line.find(f"{date} {real_time_stop}") != -1:
-                    time_stop_position += 1
-                    break
-                else:
-                    time_stop_position += 1
-            for event in logs[time_start_position:time_stop_position]:
+            logs.reverse()
+            new_logs_files = []
+            for event in logs[len(logs) - counter + 1:]:
                 list_of_events = event.rstrip("\n").split("||")
                 if list_of_events[1] == "Move":
                     file_path = list_of_events[2].split("->")[0]
                     destination_path = list_of_events[2].split("->")[1]
-                    self.move_file(file_path, destination_path, make_log=False)
-                    self.save_log("Undo", file_path)
-                    # УДАЛИТЬ ПОСЛЕДНИЙ ЛОГ, ДОЛБАЕБ
+                    file = ""
+                    for letter in file_path[::-1]:
+                        if letter != "\\":
+                            file += letter
+                        else:
+                            break
+                    file = file[::-1]
+                    new_file_path = destination_path + "\\" + file
+                    new_file_destination = file_path[:len(file_path) - len(file) - 1]
+                    new_logs_files.append(f"{new_file_path}->{new_file_destination}")
+                    if not self.stop:
+                        self.move_file(new_file_path, new_file_destination, make_log=False)
+            new_logs = []
+            for i in logs[:len(logs) - counter + 1]:
+                new_logs.append(f"{i}")
+            print(new_logs)
+        with open("logs.txt", "w", encoding="UTF-8") as output:
+            for i in new_logs:
+                output.write(i)
+            for i in new_logs_files:
+                self.save_log("Undo", i)
+
 
     def delete_folder_with_files(self, folder_path):
         """Удаляет папку вместе с файлами внутри нее"""
@@ -264,10 +279,10 @@ class Cleaner:
         new_file_directories = {
             'photo': 'photos',
             'video': 'videos',
-            'text': 'photos',
+            'text': 'text',
             'audio': 'audios',
             'archive': 'archives',
-            'executable': 'executables',
+            'executables': 'executables',
             'code': 'codes',
             'else': 'else'
         }
@@ -285,7 +300,7 @@ class Cleaner:
             'text': ['.txt', '.rtf', '.pdf', '.doc', '.docx'],
             'audio': ['.mp3', '.flac', '.m4a', '.wma', '.aac', '.ec3', '.flp', '.mtm', '.wav'],
             'archive': ['.zip', '.rar', '.7z', '.pkg', '.z'],
-            'executable': ['.exe', '.apk', '.bat', '.bin', '.msi'],
+            'executables': ['.exe', '.apk', '.bat', '.bin', '.msi'],
             'code': ['.cpp', '.py', '.pyw', '.jar']
         }
         with open("FileTypes.txt", "w", encoding="UTF-8") as types:
@@ -308,7 +323,8 @@ class Cleaner:
 
     def make_simple_sort_directories(self, where_directory):
         """Создает в выбранном пути 7 папок для сортировки в них файлы по их типу"""
-        for el in list(file_directories.keys()):
+        initial_file_direcrtories = ["photos", "videos", "text", "audios", "archives", "executables", "codes", "else"]
+        for el in initial_file_direcrtories:
             os.mkdir(fr"{where_directory}\{el}")
 
     def update_simple_sort(self, dictionary):

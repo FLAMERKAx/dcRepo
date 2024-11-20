@@ -28,16 +28,16 @@ class DesktopCleaner(QMainWindow):
         self.directories_button.clicked.connect(self.open_directories_window)
         self.types_button.clicked.connect(self.open_types_window)
         self.clean_button.clicked.connect(self.clean)
-
+        self.undo_button.clicked.connect(self.undo)
     def clean(self):
         print(self.dc.return_simple_file_directories())
         if self.simple_checkbox.isChecked():
-            if not os.path.exists(fr"{list(self.dc.return_simple_directories().values())[1]}\photo"):
+            if not os.path.exists(fr"{list(self.dc.return_simple_directories().values())[1]}\photos"):
                 self.dc.make_simple_sort_directories(list(self.dc.return_simple_directories().values())[1])
             self.dc.move_folder(list(self.dc.return_simple_directories().values())[0], simple=True)
 
-    # def undo(self):
-    #     self.dc.undo_move()
+    def undo(self):
+        self.dc.undo_move()
 
 
     def open_directories_window(self):
