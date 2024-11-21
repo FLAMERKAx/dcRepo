@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>899</width>
-    <height>691</height>
+    <height>692</height>
    </rect>
   </property>
   <property name="palette">
@@ -502,7 +502,7 @@ rgb(108, 108, 108)</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>840</x>
       <y>50</y>
       <width>47</width>
       <height>13</height>
@@ -559,28 +559,6 @@ rgb(108, 108, 108)</string>
      <string>Расширения</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>170</y>
-      <width>75</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(0, 0, 0)</string>
-    </property>
-    <property name="text">
-     <string>Польз.
-Сценарии</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="clean_button">
     <property name="geometry">
      <rect>
@@ -627,32 +605,11 @@ rgb(108, 108, 108)</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>250</y>
-      <width>51</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-     </font>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="value">
-     <number>1</number>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="simple_checkbox">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>520</y>
+      <x>210</x>
+      <y>290</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -693,45 +650,31 @@ rgb(108, 108, 108)</string>
     <property name="text">
      <string>ОТКАТИТЬ
 ПОСЛЕДНЕЕ
-ДЕЙСТВИЕ</string>
+ДЕЙСТВИЕ*</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
+   <widget class="QPushButton" name="analyze_button">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>200</y>
-      <width>421</width>
-      <height>141</height>
+      <x>740</x>
+      <y>230</y>
+      <width>121</width>
+      <height>23</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Calibri</family>
       <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
-    <property name="text">
-     <string>сортировать по времени создания(создать папки под отдельные даты)
-режим удаления файлов
-переименовывание файлов при ошибке
-анализ папки</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>240</y>
-      <width>121</width>
-      <height>23</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Выбрать Папку</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -744,32 +687,30 @@ rgb(108, 108, 108)</string>
      </rect>
     </property>
     <property name="text">
-     <string>анализировать папку</string>
+     <string>Анализировать Папку:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="analyze_out">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>120</y>
-      <width>121</width>
-      <height>81</height>
+      <x>690</x>
+      <y>90</y>
+      <width>201</width>
+      <height>121</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
-     <string>файлов:
-вес файлов:
-По типам:
-фото:
-видео:
-</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_2">
+   <widget class="QCheckBox" name="with_folder_checkbox">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>330</y>
+      <x>520</x>
+      <y>480</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -787,7 +728,7 @@ rgb(108, 108, 108)</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="delete_button">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -796,11 +737,22 @@ rgb(108, 108, 108)</string>
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
     <property name="text">
      <string>УДАЛИТЬ</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="get_folder_button">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -809,11 +761,22 @@ rgb(108, 108, 108)</string>
       <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
     <property name="text">
      <string>Выбрать папку</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+   <widget class="QPlainTextEdit" name="delete_folder">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -822,16 +785,19 @@ rgb(108, 108, 108)</string>
       <height>31</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="plainText">
-     <string>папка
+     <string>
 </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_3">
+   <widget class="QCheckBox" name="photo_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>280</y>
+      <y>330</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -849,11 +815,11 @@ rgb(108, 108, 108)</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_4">
+   <widget class="QCheckBox" name="video_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>300</y>
+      <y>350</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -871,11 +837,11 @@ rgb(108, 108, 108)</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_5">
+   <widget class="QCheckBox" name="text_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>320</y>
+      <y>370</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -893,11 +859,11 @@ rgb(108, 108, 108)</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_6">
+   <widget class="QCheckBox" name="audio_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>340</y>
+      <y>390</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -919,7 +885,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>260</y>
+      <y>310</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -928,12 +894,12 @@ rgb(108, 108, 108)</string>
      <string>Сортировать:</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_7">
+   <widget class="QCheckBox" name="confirm_checkbox">
     <property name="geometry">
      <rect>
       <x>670</x>
       <y>310</y>
-      <width>131</width>
+      <width>181</width>
       <height>17</height>
      </rect>
     </property>
@@ -944,7 +910,7 @@ rgb(108, 108, 108)</string>
      </font>
     </property>
     <property name="text">
-     <string>Режим удаления</string>
+     <string>Подтвердите действие</string>
     </property>
     <property name="checked">
      <bool>false</bool>
@@ -963,7 +929,7 @@ rgb(108, 108, 108)</string>
      <string>Условие сортировки:</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_8">
+   <widget class="QCheckBox" name="weight_checbox">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -998,11 +964,11 @@ rgb(108, 108, 108)</string>
      </rect>
     </property>
    </widget>
-   <widget class="QCheckBox" name="simple_checkbox_9">
+   <widget class="QCheckBox" name="date_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>170</y>
+      <y>180</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1020,25 +986,12 @@ rgb(108, 108, 108)</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_4">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+   <widget class="QCheckBox" name="file_type_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>200</y>
-      <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="simple_checkbox_10">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>240</y>
-      <width>131</width>
+      <y>290</y>
+      <width>91</width>
       <height>17</height>
      </rect>
     </property>
@@ -1055,6 +1008,334 @@ rgb(108, 108, 108)</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>370</y>
+      <width>311</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Убирая галочку у типа файла
+тот не будет сортироваться вовсе
+и останется в исходной папке
+</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>280</y>
+      <width>161</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Удаление имеет
+перманентный характер!</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="archive_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>410</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Архивы</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="executable_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>430</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Программы</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="code_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>450</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Код</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="else_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>470</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Прочее</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="subfolder_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>250</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Заходить в
+второстепенные папки</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_22">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>70</y>
+      <width>311</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Введите вес файла(в КБ) для сортировки
+Файлы ниже этого значения сортироваться не будут</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_23">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>190</y>
+      <width>311</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Выберите условие для сортировки
+Файлы будут сортированы в отдельные папки</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="photo_checkbox_2">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>200</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>По Годам</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="photo_checkbox_3">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>220</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>По Месяцам</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="photo_checkbox_4">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>240</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>По Дням</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_24">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>350</y>
+      <width>231</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Не удаляет папки, внутри
+директории, по этому,
+если выбрано
+Вместе с папкой
+то папка не удалится
+НО!
+Файлы внутри внутренних
+папок УДАЛЯЮТСЯ</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_20">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>640</y>
+      <width>311</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Откатывает только перенос файлов*</string>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line</zorder>
@@ -1063,31 +1344,41 @@ rgb(108, 108, 108)</string>
    <zorder>label_2</zorder>
    <zorder>directories_button</zorder>
    <zorder>types_button</zorder>
-   <zorder>pushButton_3</zorder>
    <zorder>clean_button</zorder>
-   <zorder>spinBox</zorder>
    <zorder>simple_checkbox</zorder>
    <zorder>undo_button</zorder>
-   <zorder>label_20</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>analyze_button</zorder>
    <zorder>label_3</zorder>
-   <zorder>plainTextEdit</zorder>
-   <zorder>simple_checkbox_2</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>plainTextEdit_2</zorder>
-   <zorder>simple_checkbox_3</zorder>
-   <zorder>simple_checkbox_4</zorder>
-   <zorder>simple_checkbox_5</zorder>
-   <zorder>simple_checkbox_6</zorder>
+   <zorder>analyze_out</zorder>
+   <zorder>with_folder_checkbox</zorder>
+   <zorder>delete_button</zorder>
+   <zorder>get_folder_button</zorder>
+   <zorder>delete_folder</zorder>
+   <zorder>photo_checkbox</zorder>
+   <zorder>video_checkbox</zorder>
+   <zorder>text_checkbox</zorder>
+   <zorder>audio_checkbox</zorder>
    <zorder>label_4</zorder>
-   <zorder>simple_checkbox_7</zorder>
+   <zorder>confirm_checkbox</zorder>
    <zorder>label_5</zorder>
-   <zorder>simple_checkbox_8</zorder>
+   <zorder>weight_checbox</zorder>
    <zorder>plainTextEdit_3</zorder>
-   <zorder>simple_checkbox_9</zorder>
-   <zorder>plainTextEdit_4</zorder>
-   <zorder>simple_checkbox_10</zorder>
+   <zorder>date_checkbox</zorder>
+   <zorder>file_type_checkbox</zorder>
+   <zorder>label_19</zorder>
+   <zorder>label_21</zorder>
+   <zorder>archive_checkbox</zorder>
+   <zorder>executable_checkbox</zorder>
+   <zorder>code_checkbox</zorder>
+   <zorder>else_checkbox</zorder>
+   <zorder>subfolder_checkbox</zorder>
+   <zorder>label_22</zorder>
+   <zorder>label_23</zorder>
+   <zorder>photo_checkbox_2</zorder>
+   <zorder>photo_checkbox_3</zorder>
+   <zorder>photo_checkbox_4</zorder>
+   <zorder>label_24</zorder>
+   <zorder>label_20</zorder>
   </widget>
  </widget>
  <resources/>

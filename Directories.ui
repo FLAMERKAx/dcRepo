@@ -1127,7 +1127,7 @@
 файлов перейдет в определенную 
 директорию. Но, если включить простую 
 сортировку внутри папки, в которой было 
- указано&quot;Куда&quot;создадутся 7 папок 
+ указано &quot;Куда&quot; создадутся 8 папок 
 под все необходимые типы файлов
  из-за чего вам не придется указывать 
 их вручнуюю</string>
@@ -1265,31 +1265,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>320</y>
-      <width>311</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Если не хотите сортировать какой-то тип
-файлов в &quot;Сложной&quot; сортировке
-просто не вписываете директорию
-в окно ввода</string>
-    </property>
-   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line_2</zorder>
@@ -1330,7 +1305,6 @@
    <zorder>code_button</zorder>
    <zorder>code_label</zorder>
    <zorder>code_text</zorder>
-   <zorder>label_20</zorder>
   </widget>
  </widget>
  <resources/>

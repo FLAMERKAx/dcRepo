@@ -1,4 +1,4 @@
-import os.path
+import os
 import sys
 import traceback
 
@@ -29,16 +29,59 @@ class DesktopCleaner(QMainWindow):
         self.types_button.clicked.connect(self.open_types_window)
         self.clean_button.clicked.connect(self.clean)
         self.undo_button.clicked.connect(self.undo)
+        self.analyze_button.clicked.connect(self.analyze)
+        self.get_folder_button.clicked.connect(self.get_directory)
+        self.delete_button.clicked.connect(self.delete)
+
     def clean(self):
         print(self.dc.return_simple_file_directories())
+        exeption_dict = {
+            "photo": self.photo_checkbox.isChecked(),
+            "video": self.video_checkbox.isChecked(),
+            "text": self.text_checkbox.isChecked(),
+            "audio": self.audio_checkbox.isChecked(),
+            "archive": self.archive_checkbox.isChecked(),
+            "executable": self.executable_checkbox.isChecked(),
+            "code": self.code_checkbox.isChecked(),
+            "else": self.else_checkbox.isChecked()
+        }
+        exeption_list = []
+        counter = 0
+        for i in list(exeption_dict.values()):
+            if i is False:
+                exeption_list.append(list(exeption_dict.keys())[counter])
+            counter += 1
         if self.simple_checkbox.isChecked():
             if not os.path.exists(fr"{list(self.dc.return_simple_directories().values())[1]}\photos"):
                 self.dc.make_simple_sort_directories(list(self.dc.return_simple_directories().values())[1])
-            self.dc.move_folder(list(self.dc.return_simple_directories().values())[0], simple=True)
+            self.dc.move_folder(list(self.dc.return_simple_directories().values())[0], simple=True,
+                                exceptions_list=exeption_list)
+        else:
+            self.dc.move_folder(list(self.dc.return_simple_directories().values())[0])
 
     def undo(self):
         self.dc.undo_move()
 
+    def analyze(self):
+        if self.subfolder_checkbox.isChecked():
+            data = self.dc.analyze_folder(self.directories_window.get_directory(), subfolder_flag=True)
+        else:
+            data = self.dc.analyze_folder(self.directories_window.get_directory(), subfolder_flag=False)
+        self.analyze_out.setPlainText(
+            f"""{data[0]}\nВсего Файлов: {data[1]}\nВес Файлов {data[2]}\nПо типам:\nФото: {data[3]}
+Видео: {data[4]}\nТекст: {data[5]}\nАудио: {data[6]}\nАрхивы: {data[7]}\nПрограммы: {data[8]}
+Код: {data[9]}\nПрочие Файлы: {data[10]}""")
+
+    def delete(self):
+        if self.confirm_checkbox.isChecked() and self.delete_folder.toPlainText() != "" \
+                and self.with_folder_checkbox.isChecked():
+            self.dc.delete_folder(self.delete_folder.toPlainText(), with_folder=True)
+        elif self.confirm_checkbox.isChecked() and self.delete_folder.toPlainText() != "" \
+                and not self.with_folder_checkbox.isChecked():
+            self.dc.delete_folder(self.delete_folder.toPlainText())
+
+    def get_directory(self):
+        self.delete_folder.setPlainText(self.directories_window.get_directory())
 
     def open_directories_window(self):
         if self.directories_window is None or not self.directories_window.isVisible():
@@ -57,6 +100,13 @@ class DesktopCleaner(QMainWindow):
     def closeEvent(self, event):
         self.directories_window.close()
         self.types_window.close()
+
+
+class DesktopProgressBar(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("ProgressBar.ui", self)
+        self.dc = dc()
 
 
 class DesktopDirectories(QMainWindow):
@@ -172,11 +222,12 @@ class DesktopDirectories(QMainWindow):
         return new_directory
 
     def reset_file_directories(self):
-        file_directories = self.dc.return_file_directories()
-        simple_directories = self.dc.return_simple_directories()
         if self.confirm_checkbox.isChecked():
             self.confirm_label.hide()
-            # self.dc.reset_file_directories()
+            self.dc.reset_file_directories()
+            self.dc.reset_simple_sort()
+            file_directories = self.dc.return_file_directories()
+            simple_directories = self.dc.return_simple_directories()
             keys = list(file_directories.keys())
             simple_values = list(simple_directories.values())
             self.from_text.setPlainText(simple_values[0])
@@ -205,6 +256,7 @@ class DesktopDirectories(QMainWindow):
                 "code": self.code_text.toPlainText(),
                 "else": self.else_text.toPlainText(),
             }
+            self.dc.update_simple_sort(self.from_text.toPlainText(), from_flag=True)
             self.dc.update_file_directories(new_directories)
         else:
             new_directories = {
@@ -212,7 +264,6 @@ class DesktopDirectories(QMainWindow):
                 "where": self.where_text.toPlainText()
             }
             self.dc.update_simple_sort(new_directories)
-
 
 
 class DesktopTypes(QMainWindow):

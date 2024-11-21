@@ -1,8 +1,8 @@
-photo|photos
-video|videos
+photo|photo
+video|video
 text|text
-audio|audios
-archive|archives
-executables|executables
-code|codes
+audio|audio
+archive|archive
+executable|executable
+code|code
 else|else

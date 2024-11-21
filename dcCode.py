@@ -1,6 +1,6 @@
 import os
 import shutil
-from datetime import datetime, timedelta
+from datetime import datetime
 
 DESKTOP = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
@@ -28,7 +28,7 @@ else:
 
 simple_sort_file_directories = {}
 if not os.path.exists("SimpleSortFileDirectories.txt"):
-    simple_directories = {
+    simple_file_directories = {
         'photo': fr"{list(simple_directories.values())[1]}\photos",
         'video': fr"{list(simple_directories.values())[1]}\videos",
         'text': fr"{list(simple_directories.values())[1]}\text",
@@ -39,8 +39,8 @@ if not os.path.exists("SimpleSortFileDirectories.txt"):
         "else": fr"{list(simple_directories.values())[1]}\else"
     }
     with open("SimpleSortFileDirectories.txt", "w", encoding="UTF-8") as simple_output:
-        keys = list(simple_directories.keys())
-        values = list(simple_directories.values())
+        keys = list(simple_file_directories.keys())
+        values = list(simple_file_directories.values())
         for i in range(len(keys)):
             simple_output.write(f"{keys[i]}|{values[i]}\n")
 else:
@@ -131,6 +131,23 @@ class Cleaner:
             if input_file in file_type:
                 return name
 
+    def convert_bytes(self, num):
+        for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
+            if num < 1024.0:
+                return "%3.2f %s" % (num, x)
+            num /= 1024.0
+
+    def get_file_size(self, file_path):
+        if os.path.isfile(file_path):
+            file_info = os.stat(file_path)
+            return file_info.st_size
+
+    def get_file_creation_time(self, file_path):
+        if os.path.isfile(file_path):
+            c_time = os.path.getctime(file_path)
+            dt_c = datetime.fromtimestamp(c_time)
+            return str(dt_c).split(" ")[0]
+
     def save_log(self, event, file_path=""):
         """Вписывает лог действия в текстовой файл с логами"""
         if not os.path.exists("logs.txt"):
@@ -141,9 +158,10 @@ class Cleaner:
             date_with_time = now_time.strftime("%d.%m.%Y %H:%M:%S")
             log_file.write(f"{date_with_time}||{event}||{file_path}\n")
 
-
-    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False):
+    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False, exceptions=None):
         """Переносит файл в соответсвующую его типу файла папку или по указанному пути"""
+        if exceptions is None:
+            exceptions = []
         if simple_sort:
             try:
                 final_destination = simple_sort_file_directories[self.get_file_type(file_path)]
@@ -155,24 +173,29 @@ class Cleaner:
                 if final_destination == "":
                     return None
         if os.path.exists(file_path) and os.path.exists(final_destination):
-            try:
-                shutil.move(file_path, final_destination)
-                if make_log:
-                    self.save_log("Move", f"{file_path}->{final_destination}")
-            except shutil.Error:
-                self.stop = True
+            if self.get_file_type(file_path) not in exceptions:
+                try:
+                    shutil.move(file_path, final_destination)
+                    if make_log:
+                        self.save_log("Move", f"{file_path}->{final_destination}")
+                except shutil.Error:
+                    self.stop = True
+            else:
+                pass
             return True
         else:
             return False
 
-    def move_folder(self, folder_path, simple=False):
+    def move_folder(self, folder_path, simple=False, exceptions_list=None):
         """Перемещает файлы из одной папки в другую"""
+        if exceptions_list is None:
+            exceptions_list = []
         self.save_log("FolderMove")
         for folder, subfolder, files in os.walk(folder_path):
             for folder_file in files:
                 if not self.stop:
                     folder_file = fr"{folder}\{folder_file}"
-                    self.move_file(folder_file, simple_sort=simple)
+                    self.move_file(folder_file, simple_sort=simple, exceptions=exceptions_list)
                 else:
                     self.stop = False
                     return True
@@ -185,6 +208,51 @@ class Cleaner:
             return True
         else:
             return False
+
+    def delete_folder(self, folder_path, with_folder=False):
+        """Удаляет папку вместе с файлами внутри нее"""
+        if with_folder:
+            main_folder = ""
+            flag = False
+            for folder, subfolder, files in os.walk(folder_path):
+                if not flag:
+                    for folder_file in files:
+                        if main_folder == "":
+                            main_folder = folder
+                        else:
+                            if main_folder == folder:
+                                pass
+                            else:
+                                flag = True
+                                break
+                        folder_file = fr"{folder}\{folder_file}"
+                        self.delete_file(folder_file)
+            try:
+                os.rmdir(folder_path)
+            except OSError:
+                for folder, subfolder, files in os.walk(folder_path):
+                    for folder_file in files:
+                        folder_file = fr"{folder}\{folder_file}"
+                        self.delete_file(folder_file)
+            self.save_log("FolderWithFilesDeleted")
+        else:
+            main_folder = ""
+            flag = False
+            for folder, subfolder, files in os.walk(folder_path):
+                if not flag:
+                    for folder_file in files:
+                        if main_folder == "":
+                            main_folder = folder
+                        else:
+                            if main_folder == folder:
+                                pass
+                            else:
+                                flag = True
+                                break
+                        folder_file = fr"{folder}\{folder_file}"
+                        self.delete_file(folder_file)
+            self.save_log("FilesWithoutFolderDeleted")
+
 
     def undo_move(self):
         """Отменяет все действия в указанном отрезке времени из логов"""
@@ -225,16 +293,6 @@ class Cleaner:
             for i in new_logs_files:
                 self.save_log("Undo", i)
 
-
-    def delete_folder_with_files(self, folder_path):
-        """Удаляет папку вместе с файлами внутри нее"""
-        for folder, subfolder, files in os.walk(folder_path):
-            for folder_file in files:
-                folder_file = os.path.join(folder, folder_file)
-                self.delete_file(folder_file)
-        os.rmdir(folder_path)
-        self.save_log("FolderWithFilesDeleted")
-
     def update_file_types(self, types_dictionary):
         """Обновляет словарь типов файла по запросу пользователя"""
         with open("FileTypes.txt", "w", encoding="UTF-8") as output_file:
@@ -250,6 +308,34 @@ class Cleaner:
                     output_file.write(f"{keys[i]}|{buffer_values}\n")
                     buffer_values = ""
                     break
+
+    def update_simple_sort(self, dictionary, from_flag=False):
+        if not from_flag:
+            with open("SimpleSortDirectories.txt", "w+", encoding="UTF-8") as output_file:
+                for i in range(len(list(dictionary.keys()))):
+                    keys = list(dictionary.keys())
+                    values = list(dictionary.values())
+                    output_file.write(f"{keys[i]}|{values[i]}\n")
+            simple_file_directories = {
+                'photo': fr"{list(simple_directories.values())[1]}\photos",
+                'video': fr"{list(simple_directories.values())[1]}\videos",
+                'text': fr"{list(simple_directories.values())[1]}\text",
+                'audio': fr"{list(simple_directories.values())[1]}\audios",
+                'archive': fr"{list(simple_directories.values())[1]}\archives",
+                'executable': fr"{list(simple_directories.values())[1]}\executables",
+                'code': fr"{list(simple_directories.values())[1]}\codes",
+                "else": fr"{list(simple_directories.values())[1]}\else"
+            }
+            with open("SimpleSortFileDirectories.txt", "w", encoding="UTF-8") as simple_output:
+                keys = list(simple_file_directories.keys())
+                values = list(simple_file_directories.values())
+                for i in range(len(keys)):
+                    simple_output.write(f"{keys[i]}|{values[i]}\n")
+        else:
+            where = open("SimpleSortDirectories.txt", "r", encoding="UTF-8").readlines()[1].rstrip("\n")
+            with open("SimpleSortDirectories.txt", "w", encoding="UTF-8") as output_file:
+                from_folder = f"from|{dictionary}"
+                output_file.write(f"{from_folder}\n{where}\n")
 
     def update_file_directories(self, directories_dictionary):
         """Обновляет словарь директорий файлов по запросу пользователя"""
@@ -317,6 +403,32 @@ class Cleaner:
                     buffer_values = ""
                     break
 
+    def reset_simple_sort(self):
+        simple_directories = {
+            "from": DESKTOP,
+            "where": "SortedFiles"
+        }
+        with open("SimpleSortDirectories.txt", "w", encoding="UTF-8") as simple_output:
+            keys = list(simple_directories.keys())
+            values = list(simple_directories.values())
+            for i in range(len(keys)):
+                simple_output.write(f"{keys[i]}|{values[i]}\n")
+        simple_directories = {
+            'photo': fr"{list(simple_directories.values())[1]}\photos",
+            'video': fr"{list(simple_directories.values())[1]}\videos",
+            'text': fr"{list(simple_directories.values())[1]}\text",
+            'audio': fr"{list(simple_directories.values())[1]}\audios",
+            'archive': fr"{list(simple_directories.values())[1]}\archives",
+            'executable': fr"{list(simple_directories.values())[1]}\executables",
+            'code': fr"{list(simple_directories.values())[1]}\codes",
+            "else": fr"{list(simple_directories.values())[1]}\else"
+        }
+        with open("SimpleSortFileDirectories.txt", "w", encoding="UTF-8") as simple_output:
+            keys = list(simple_directories.keys())
+            values = list(simple_directories.values())
+            for i in range(len(keys)):
+                simple_output.write(f"{keys[i]}|{values[i]}\n")
+
     def make_directory(self, directory_name, directory_path):
         """Создает в указанном пути папку с определенным названием"""
         os.mkdir(fr"{directory_path}\{directory_name}")
@@ -325,11 +437,44 @@ class Cleaner:
         """Создает в выбранном пути 7 папок для сортировки в них файлы по их типу"""
         initial_file_direcrtories = ["photos", "videos", "text", "audios", "archives", "executables", "codes", "else"]
         for el in initial_file_direcrtories:
-            os.mkdir(fr"{where_directory}\{el}")
+            self.make_directory(where_directory, el)
 
-    def update_simple_sort(self, dictionary):
-        with open("SimpleSortDirectories.txt", "w+", encoding="UTF-8") as output_file:
-            for i in range(len(list(dictionary.keys()))):
-                keys = list(dictionary.keys())
-                values = list(dictionary.values())
-                output_file.write(f"{keys[i]}|{values[i]}\n")
+    def analyze_folder(self, folder_path, subfolder_flag=False):
+        files_with_size = []
+        main_folder = ""
+        flag = False
+        for folder, subfolder, files in os.walk(folder_path):
+            if not flag and subfolder_flag is False:
+                for folder_file in files:
+                    if main_folder == "":
+                        main_folder = folder
+                    else:
+                        if main_folder == folder:
+                            pass
+                        else:
+                            flag = True
+                            break
+                    folder_file = fr"{folder}\{folder_file}"
+                    files_with_size.append((folder_file, self.get_file_size(folder_file)))
+            elif subfolder_flag:
+                for folder_file in files:
+                    folder_file = fr"{folder}\{folder_file}"
+                    files_with_size.append((folder_file, self.get_file_size(folder_file)))
+        files_with_size = sorted(files_with_size, key=lambda size: size[1])
+        folder_size = 0
+        for i in files_with_size:
+            folder_size += i[1]
+        folder_file_types = []
+        for i in files_with_size:
+            folder_file_types.append(self.get_file_type(i[0]))
+        photo = folder_file_types.count("photo")
+        video = folder_file_types.count("video")
+        audio = folder_file_types.count("audio")
+        text = folder_file_types.count("text")
+        archive = folder_file_types.count("archive")
+        executable = folder_file_types.count("executable")
+        code = folder_file_types.count("code")
+        else1 = folder_file_types.count(None)
+        print(folder_file_types)
+        return [folder_path, len(files_with_size), self.convert_bytes(folder_size),
+                photo, video, text, audio, archive, executable, code, else1]
