@@ -789,8 +789,7 @@ rgb(108, 108, 108)</string>
      <bool>true</bool>
     </property>
     <property name="plainText">
-     <string>
-</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="photo_checkbox">
@@ -929,7 +928,7 @@ rgb(108, 108, 108)</string>
      <string>Условие сортировки:</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="weight_checbox">
+   <widget class="QCheckBox" name="weight_checkbox">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -951,7 +950,7 @@ rgb(108, 108, 108)</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_3">
+   <widget class="QPlainTextEdit" name="weight_text">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -1361,8 +1360,8 @@ rgb(108, 108, 108)</string>
    <zorder>label_4</zorder>
    <zorder>confirm_checkbox</zorder>
    <zorder>label_5</zorder>
-   <zorder>weight_checbox</zorder>
-   <zorder>plainTextEdit_3</zorder>
+   <zorder>weight_checkbox</zorder>
+   <zorder>weight_text</zorder>
    <zorder>date_checkbox</zorder>
    <zorder>file_type_checkbox</zorder>
    <zorder>label_19</zorder>

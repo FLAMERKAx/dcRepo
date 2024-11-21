@@ -169,7 +169,10 @@ class Cleaner:
                 final_destination = simple_sort_file_directories["else"]
         else:
             if final_destination is None:
-                final_destination = file_directories[self.get_file_type(file_path)][0]
+                try:
+                    final_destination = file_directories[self.get_file_type(file_path)]
+                except KeyError:
+                    final_destination = file_directories["else"]
                 if final_destination == "":
                     return None
         if os.path.exists(file_path) and os.path.exists(final_destination):
@@ -284,14 +287,13 @@ class Cleaner:
                     if not self.stop:
                         self.move_file(new_file_path, new_file_destination, make_log=False)
             new_logs = []
-            for i in logs[:len(logs) - counter + 1]:
+            for i in logs[:len(logs) - counter]:
                 new_logs.append(f"{i}")
             print(new_logs)
         with open("logs.txt", "w", encoding="UTF-8") as output:
             for i in new_logs:
                 output.write(i)
-            for i in new_logs_files:
-                self.save_log("Undo", i)
+        self.save_log("Undo")
 
     def update_file_types(self, types_dictionary):
         """Обновляет словарь типов файла по запросу пользователя"""

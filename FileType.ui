@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>662</height>
+    <height>739</height>
    </rect>
   </property>
   <property name="palette">
@@ -523,7 +523,7 @@
      <string>Фотографии:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="photo_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -552,7 +552,7 @@
      <string>Видео:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+   <widget class="QPlainTextEdit" name="video_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -581,7 +581,7 @@
      <string>Текст:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_3">
+   <widget class="QPlainTextEdit" name="text_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -610,7 +610,7 @@
      <string>Аудио:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_4">
+   <widget class="QPlainTextEdit" name="audio_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -639,7 +639,7 @@
      <string>Архивы:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_5">
+   <widget class="QPlainTextEdit" name="archive_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -668,7 +668,7 @@
      <string>Программы:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_6">
+   <widget class="QPlainTextEdit" name="executable_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -682,7 +682,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>520</y>
+      <y>600</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -697,11 +697,11 @@
      <string>Прочее:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit_7">
+   <widget class="QPlainTextEdit" name="else_text">
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>520</y>
+      <y>600</y>
       <width>421</width>
       <height>41</height>
      </rect>
@@ -711,7 +711,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>610</y>
+      <y>690</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -727,7 +727,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>580</y>
+      <y>660</y>
       <width>151</width>
       <height>17</height>
      </rect>
@@ -749,7 +749,7 @@
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>580</y>
+      <y>660</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -766,7 +766,7 @@
      <string>Сохранить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_11">
+   <widget class="QPushButton" name="show_button">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -786,7 +786,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>470</y>
+      <y>550</y>
       <width>631</width>
       <height>41</height>
      </rect>
@@ -802,29 +802,60 @@
 не написаны выше. Впишите сюда расширения, если хотите сортировать это расширение отдельно.</string>
     </property>
    </widget>
+   <widget class="QPlainTextEdit" name="executable_text_2">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>480</y>
+      <width>421</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>480</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Программы:</string>
+    </property>
+   </widget>
    <zorder>line_2</zorder>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>label_12</zorder>
    <zorder>label_13</zorder>
-   <zorder>plainTextEdit</zorder>
+   <zorder>photo_text</zorder>
    <zorder>label_14</zorder>
-   <zorder>plainTextEdit_2</zorder>
+   <zorder>video_text</zorder>
    <zorder>label_15</zorder>
-   <zorder>plainTextEdit_3</zorder>
+   <zorder>text_text</zorder>
    <zorder>label_16</zorder>
-   <zorder>plainTextEdit_4</zorder>
+   <zorder>audio_text</zorder>
    <zorder>label_17</zorder>
-   <zorder>plainTextEdit_5</zorder>
+   <zorder>archive_text</zorder>
    <zorder>label_18</zorder>
-   <zorder>plainTextEdit_6</zorder>
+   <zorder>executable_text</zorder>
    <zorder>label_19</zorder>
-   <zorder>plainTextEdit_7</zorder>
+   <zorder>else_text</zorder>
    <zorder>pushButton_10</zorder>
    <zorder>checkBox_2</zorder>
    <zorder>pushButton_3</zorder>
-   <zorder>pushButton_11</zorder>
+   <zorder>show_button</zorder>
    <zorder>label_20</zorder>
+   <zorder>executable_text_2</zorder>
+   <zorder>label_21</zorder>
   </widget>
  </widget>
  <resources/>

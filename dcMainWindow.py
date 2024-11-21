@@ -32,6 +32,8 @@ class DesktopCleaner(QMainWindow):
         self.analyze_button.clicked.connect(self.analyze)
         self.get_folder_button.clicked.connect(self.get_directory)
         self.delete_button.clicked.connect(self.delete)
+        self.weight_checkbox.clicked.connect(lambda: self.weight_text.setEnabled(True) if self.weight_checkbox.isChecked() else self.weight_text.setEnabled(False))
+
 
     def clean(self):
         print(self.dc.return_simple_file_directories())
@@ -271,10 +273,25 @@ class DesktopTypes(QMainWindow):
         super().__init__()
         uic.loadUi("FileType.ui", self)
         self.initUI()
+        self.dc = dc()
 
     def initUI(self):
-        self.setFixedSize(620, 660)
+        self.setFixedSize(620, 740)
         self.setWindowTitle('dcFileTypes')
+        self.show_button.clicked.connect(self.show_type)
+
+    def show_type(self):
+        file_types = list(self.dc.return_file_types().values())
+        self.photo_text.setPlainText(file_types[0])
+        self.video_text.setPlainText(file_types[1])
+        self.text_text.setPlainText(file_types[2])
+        self.audio_text.setPlainText(file_types[3])
+        self.archive_text.setPlainText(file_types[4])
+        self.executable_text.setPlainText(file_types[5])
+        self.code_text.setPlainText(file_types[6])
+        self.else_text.setPlainText(file_types[7])
+
+
 
 
 def excepthook(exc_type, exc_value, exc_tb):
