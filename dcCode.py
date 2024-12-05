@@ -121,7 +121,6 @@ else:
 class Cleaner:
     def __init__(self):
         """Класс для переноса, удаления и сортировки файлов"""
-        self.desktop = DESKTOP
         self.stop = False
 
     def get_file_type(self, file_path):
@@ -158,7 +157,7 @@ class Cleaner:
             date_with_time = now_time.strftime("%d.%m.%Y %H:%M:%S")
             log_file.write(f"{date_with_time}||{event}||{file_path}\n")
 
-    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False, exceptions=None):
+    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False, exceptions=None, mode="type", weight=0):
         """Переносит файл в соответсвующую его типу файла папку или по указанному пути"""
         if exceptions is None:
             exceptions = []
@@ -189,7 +188,7 @@ class Cleaner:
         else:
             return False
 
-    def move_folder(self, folder_path, simple=False, exceptions_list=None):
+    def move_folder(self, folder_path, simple=False, exceptions_list=None, sort_mode="type", file_weight=0):
         """Перемещает файлы из одной папки в другую"""
         if exceptions_list is None:
             exceptions_list = []
@@ -198,7 +197,7 @@ class Cleaner:
             for folder_file in files:
                 if not self.stop:
                     folder_file = fr"{folder}\{folder_file}"
-                    self.move_file(folder_file, simple_sort=simple, exceptions=exceptions_list)
+                    self.move_file(folder_file, simple_sort=simple, exceptions=exceptions_list, mode=sort_mode, weight=file_weight)
                 else:
                     self.stop = False
                     return True

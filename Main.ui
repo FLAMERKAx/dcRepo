@@ -502,10 +502,10 @@ rgb(108, 108, 108)</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>840</x>
+      <x>830</x>
       <y>50</y>
-      <width>47</width>
-      <height>13</height>
+      <width>61</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -609,7 +609,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>290</y>
+      <y>320</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -657,7 +657,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>230</y>
+      <y>260</y>
       <width>121</width>
       <height>23</height>
      </rect>
@@ -681,7 +681,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>210</y>
+      <y>240</y>
       <width>161</width>
       <height>16</height>
      </rect>
@@ -694,7 +694,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>90</y>
+      <y>120</y>
       <width>201</width>
       <height>121</height>
      </rect>
@@ -710,7 +710,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>480</y>
+      <y>510</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -732,7 +732,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>350</y>
+      <y>380</y>
       <width>191</width>
       <height>51</height>
      </rect>
@@ -756,7 +756,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>410</y>
+      <y>440</y>
       <width>191</width>
       <height>21</height>
      </rect>
@@ -780,7 +780,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>440</y>
+      <y>470</y>
       <width>191</width>
       <height>31</height>
      </rect>
@@ -796,7 +796,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>330</y>
+      <y>360</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -818,7 +818,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>350</y>
+      <y>380</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -840,7 +840,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>370</y>
+      <y>400</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -862,7 +862,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>390</y>
+      <y>420</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -884,7 +884,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>310</y>
+      <y>340</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -897,7 +897,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>310</y>
+      <y>340</y>
       <width>181</width>
       <height>17</height>
      </rect>
@@ -919,7 +919,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>90</y>
+      <y>120</y>
       <width>121</width>
       <height>16</height>
      </rect>
@@ -929,10 +929,13 @@ rgb(108, 108, 108)</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="weight_checkbox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>110</y>
+      <y>140</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -957,17 +960,23 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>130</y>
+      <y>160</y>
       <width>171</width>
       <height>31</height>
      </rect>
     </property>
+    <property name="plainText">
+     <string>0</string>
+    </property>
    </widget>
    <widget class="QCheckBox" name="date_checkbox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>180</y>
+      <y>210</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -989,7 +998,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>290</y>
+      <y>320</y>
       <width>91</width>
       <height>17</height>
      </rect>
@@ -1014,9 +1023,9 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>370</y>
+      <y>380</y>
       <width>311</width>
-      <height>61</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -1039,7 +1048,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>280</y>
+      <y>310</y>
       <width>161</width>
       <height>61</height>
      </rect>
@@ -1062,7 +1071,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>410</y>
+      <y>440</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1084,7 +1093,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>430</y>
+      <y>460</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1106,7 +1115,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>450</y>
+      <y>480</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1128,7 +1137,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>470</y>
+      <y>500</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1150,7 +1159,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>250</y>
+      <y>280</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -1162,7 +1171,7 @@ rgb(108, 108, 108)</string>
      </font>
     </property>
     <property name="text">
-     <string>Заходить в
+     <string>Заходить во
 второстепенные папки</string>
     </property>
     <property name="checked">
@@ -1171,14 +1180,14 @@ rgb(108, 108, 108)</string>
    </widget>
    <widget class="QLabel" name="label_22">
     <property name="enabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>70</y>
+      <y>160</y>
       <width>311</width>
-      <height>141</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -1188,20 +1197,20 @@ rgb(108, 108, 108)</string>
      </font>
     </property>
     <property name="text">
-     <string>Введите вес файла(в КБ) для сортировки
+     <string>Введите вес файла(в МБ) для сортировки
 Файлы ниже этого значения сортироваться не будут</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_23">
     <property name="enabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>190</y>
+      <y>230</y>
       <width>311</width>
-      <height>81</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -1215,11 +1224,14 @@ rgb(108, 108, 108)</string>
 Файлы будут сортированы в отдельные папки</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="photo_checkbox_2">
+   <widget class="QCheckBox" name="year_checkbox">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>200</y>
+      <y>230</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1237,11 +1249,14 @@ rgb(108, 108, 108)</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="photo_checkbox_3">
+   <widget class="QCheckBox" name="month_checkbox">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>220</y>
+      <y>250</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1259,11 +1274,14 @@ rgb(108, 108, 108)</string>
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QCheckBox" name="photo_checkbox_4">
+   <widget class="QCheckBox" name="day_checkbox">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>240</y>
+      <y>270</y>
       <width>131</width>
       <height>17</height>
      </rect>
@@ -1288,7 +1306,7 @@ rgb(108, 108, 108)</string>
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>350</y>
+      <y>380</y>
       <width>231</width>
       <height>121</height>
      </rect>
@@ -1335,6 +1353,112 @@ rgb(108, 108, 108)</string>
      <string>Откатывает только перенос файлов*</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="execute_preferences">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>75</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Выставить
+Сохраненную
+Настройку</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="save_preferences">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>75</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>Сохранить
+настройку</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="preferences_number">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>640</y>
+      <width>51</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="without_sort_checkbox">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>120</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Перенести файлы без сортировки</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_25">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>100</y>
+      <width>161</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Используется директория
+из простой сортировки</string>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line</zorder>
@@ -1373,11 +1497,16 @@ rgb(108, 108, 108)</string>
    <zorder>subfolder_checkbox</zorder>
    <zorder>label_22</zorder>
    <zorder>label_23</zorder>
-   <zorder>photo_checkbox_2</zorder>
-   <zorder>photo_checkbox_3</zorder>
-   <zorder>photo_checkbox_4</zorder>
+   <zorder>year_checkbox</zorder>
+   <zorder>month_checkbox</zorder>
+   <zorder>day_checkbox</zorder>
    <zorder>label_24</zorder>
    <zorder>label_20</zorder>
+   <zorder>execute_preferences</zorder>
+   <zorder>save_preferences</zorder>
+   <zorder>preferences_number</zorder>
+   <zorder>without_sort_checkbox</zorder>
+   <zorder>label_25</zorder>
   </widget>
  </widget>
  <resources/>

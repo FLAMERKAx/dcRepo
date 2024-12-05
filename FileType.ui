@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>614</width>
-    <height>739</height>
+    <width>552</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="palette">
@@ -441,7 +441,7 @@
     <property name="font">
      <font>
       <family>Calibri</family>
-      <pointsize>36</pointsize>
+      <pointsize>28</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -678,40 +678,11 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_19">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>600</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Прочее:</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="else_text">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>600</y>
-      <width>421</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="reset_button">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>690</y>
+      <y>570</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -723,11 +694,11 @@
      <string>Сбросить настройки</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="confirm_checkbox">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>660</y>
+      <y>540</y>
       <width>151</width>
       <height>17</height>
      </rect>
@@ -745,11 +716,11 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="save_button">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>660</y>
+      <x>360</x>
+      <y>540</y>
       <width>171</width>
       <height>51</height>
      </rect>
@@ -782,27 +753,7 @@
      <string>Показать</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>550</y>
-      <width>631</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Calibri</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>&quot;Прочее&quot; оставьте пустым, если хотите что бы в него сортировались все файлы, расширения которых 
-не написаны выше. Впишите сюда расширения, если хотите сортировать это расширение отдельно.</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="executable_text_2">
+   <widget class="QPlainTextEdit" name="code_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -831,6 +782,27 @@
      <string>Программы:</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>530</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Убедитесь что каждый тип
+имеет хотя бы одно
+расширение!</string>
+    </property>
+   </widget>
    <zorder>line_2</zorder>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
@@ -847,15 +819,13 @@
    <zorder>archive_text</zorder>
    <zorder>label_18</zorder>
    <zorder>executable_text</zorder>
-   <zorder>label_19</zorder>
-   <zorder>else_text</zorder>
-   <zorder>pushButton_10</zorder>
-   <zorder>checkBox_2</zorder>
-   <zorder>pushButton_3</zorder>
+   <zorder>reset_button</zorder>
+   <zorder>confirm_checkbox</zorder>
+   <zorder>save_button</zorder>
    <zorder>show_button</zorder>
-   <zorder>label_20</zorder>
-   <zorder>executable_text_2</zorder>
+   <zorder>code_text</zorder>
    <zorder>label_21</zorder>
+   <zorder>label_19</zorder>
   </widget>
  </widget>
  <resources/>
