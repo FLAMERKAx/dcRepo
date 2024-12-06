@@ -4,6 +4,43 @@ from datetime import datetime
 
 DESKTOP = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
+preferences = {}
+if not os.path.exists("Preferences.txt"):
+    preferences = {
+        "just_move": False,
+        "weight_sort": False,
+        "weight_text": 0,
+        "date_sort": False,
+        "year_date_sort": False,
+        "month_date_sort": False,
+        "day_date_sort": False,
+        "type_sort": True,
+        "simple_sort": True,
+        "photo": True,
+        "video": True,
+        "text": True,
+        "audio": True,
+        "archive": True,
+        "executable": True,
+        "code": True,
+        "else": True
+    }
+    with open("Preferences.txt", "w", encoding="UTF-8") as simple_output:
+        keys = list(preferences.keys())
+        values = list(preferences.values())
+        for i in range(len(keys)):
+            simple_output.write(f"{keys[i]}|{values[i]}\n")
+else:
+    with open("Preferences.txt", "r", encoding="UTF-8") as simple_output:
+        lines = simple_output.readlines()
+        keys = list(preferences.keys())
+        values = list(preferences.values())
+        for i in lines:
+            values.append(i[i.find("|") + 1:].rstrip("\n"))
+            keys.append(i[:i.find("|")])
+        for i in range(len(keys)):
+            preferences[keys[i]] = values[i]
+
 simple_directories = {}
 if not os.path.exists("SimpleSortDirectories.txt"):
     simple_directories = {
@@ -145,7 +182,7 @@ class Cleaner:
         if os.path.isfile(file_path):
             c_time = os.path.getctime(file_path)
             dt_c = datetime.fromtimestamp(c_time)
-            return str(dt_c).split(" ")[0]
+            return str(dt_c).split(" ")[0].split("-")
 
     def save_log(self, event, file_path=""):
         """Вписывает лог действия в текстовой файл с логами"""
@@ -157,7 +194,7 @@ class Cleaner:
             date_with_time = now_time.strftime("%d.%m.%Y %H:%M:%S")
             log_file.write(f"{date_with_time}||{event}||{file_path}\n")
 
-    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False, exceptions=None, mode="type", weight=0):
+    def move_file(self, file_path, final_destination=None, make_log=True, simple_sort=False, exceptions=None):
         """Переносит файл в соответсвующую его типу файла папку или по указанному пути"""
         if exceptions is None:
             exceptions = []
@@ -188,6 +225,78 @@ class Cleaner:
         else:
             return False
 
+    def just_move(self):
+        self.save_log("FolderMove")
+        final_destination = list(self.return_simple_directories().values())[1]
+        folder_path = list(self.return_simple_directories().values())[0]
+        for folder, subfolder, files in os.walk(folder_path):
+            for folder_file in files:
+                if not self.stop:
+                    file_path = fr"{folder}\{folder_file}"
+                    if os.path.exists(file_path) and os.path.exists(final_destination):
+                        try:
+                            shutil.move(file_path, final_destination)
+                            self.save_log("Move", f"{file_path}->{final_destination}")
+                        except shutil.Error:
+                            self.stop = True
+                else:
+                    self.stop = False
+                    return True
+
+    def date_folder_move(self, file_path, date_type):
+        files_list = []
+        main_folder = ""
+        first_folder = ""
+        flag = False
+        for folder, subfolder, files in os.walk(file_path):
+            if first_folder == "":
+                first_folder = folder
+            if not flag:
+                for folder_file in files:
+                    if main_folder == "":
+                        main_folder = folder
+                    else:
+                        if main_folder == folder:
+                            pass
+                        else:
+                            flag = True
+                            break
+                    folder_file = fr"{folder}\{folder_file}"
+                    files_list.append(folder_file)
+        if date_type == "date_year":
+            years = []
+            for file in files_list:
+                years.append(self.get_file_creation_time(file)[0])
+            set_years = set(years)
+            for year in list(set_years):
+                if not os.path.exists(fr"{first_folder}\{year}"):
+                    self.make_directory(year, first_folder)
+            for file in files_list:
+                file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[0]}"
+                self.move_file(file, file_directory, make_log=True)
+        if date_type == "date_month":
+            months = []
+            for file in files_list:
+                months.append(self.get_file_creation_time(file)[1])
+            set_months = set(months)
+            for month in list(set_months):
+                if not os.path.exists(fr"{first_folder}\{month}"):
+                    self.make_directory(month, first_folder)
+            for file in files_list:
+                file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[1]}"
+                self.move_file(file, file_directory, make_log=True)
+        if date_type == "date_day":
+            days = []
+            for file in files_list:
+                days.append(self.get_file_creation_time(file)[2])
+            set_days = set(days)
+            for day in list(set_days):
+                if not os.path.exists(fr"{first_folder}\{day}"):
+                    self.make_directory(day, first_folder)
+            for file in files_list:
+                file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[2]}"
+                self.move_file(file, file_directory, make_log=True)
+
     def move_folder(self, folder_path, simple=False, exceptions_list=None, sort_mode="type", file_weight=0):
         """Перемещает файлы из одной папки в другую"""
         if exceptions_list is None:
@@ -197,7 +306,15 @@ class Cleaner:
             for folder_file in files:
                 if not self.stop:
                     folder_file = fr"{folder}\{folder_file}"
-                    self.move_file(folder_file, simple_sort=simple, exceptions=exceptions_list, mode=sort_mode, weight=file_weight)
+                    if sort_mode == "weight":
+                        if self.get_file_size(folder_file) < file_weight * 1024 * 1024:
+                            continue
+                        else:
+                            self.move_file(folder_file)
+                    if sort_mode == "date_year":
+                        self.date_folder_move(folder_file, "year")
+                    else:
+                        self.move_file(folder_file, simple_sort=simple, exceptions=exceptions_list)
                 else:
                     self.stop = False
                     return True
@@ -254,7 +371,6 @@ class Cleaner:
                         folder_file = fr"{folder}\{folder_file}"
                         self.delete_file(folder_file)
             self.save_log("FilesWithoutFolderDeleted")
-
 
     def undo_move(self):
         """Отменяет все действия в указанном отрезке времени из логов"""
@@ -361,6 +477,19 @@ class Cleaner:
     def return_simple_file_directories(self):
         return simple_sort_file_directories
 
+    def return_preferences(self):
+        new_preferences = {}
+        with open("Preferences.txt", "r", encoding="UTF-8") as simple_output:
+            lines = simple_output.readlines()
+            keys = list(preferences.keys())
+            values = list(preferences.values())
+            for i in lines:
+                values.append(i[i.find("|") + 1:].rstrip("\n"))
+                keys.append(i[:i.find("|")])
+            for i in range(len(keys)):
+                new_preferences[keys[i]] = values[i]
+        return new_preferences
+
     def reset_file_directories(self):
         """Сбрасывает файл с директориями файлов до базовых значений"""
         new_file_directories = {
@@ -439,6 +568,13 @@ class Cleaner:
         initial_file_direcrtories = ["photos", "videos", "text", "audios", "archives", "executables", "codes", "else"]
         for el in initial_file_direcrtories:
             self.make_directory(where_directory, el)
+
+    def make_user_preference(self, preference_dict):
+        with open("Preferences.txt", "w", encoding="UTF-8") as output_file:
+            for i in range(len(list(preference_dict.keys()))):
+                keys = list(preference_dict.keys())
+                values = list(preference_dict.values())
+                output_file.write(f"{keys[i]}|{values[i]}\n")
 
     def analyze_folder(self, folder_path, subfolder_flag=False):
         files_with_size = []
