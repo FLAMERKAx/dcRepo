@@ -1,8 +1,0 @@
-photo|D:\CustomFolder\Фото
-video|D:\CustomFolder\Видео
-text|D:\CustomFolder\Текстовые Файлы
-audio|D:\CustomFolder\Аудио
-archive|D:\CustomFolder\Архивы
-executable|D:\CustomFolder\Проограммы
-code|D:\CustomFolder\Программный Код
-else|D:\CustomFolder\Прочие Файлы

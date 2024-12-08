@@ -1,7 +1,0 @@
-photo|.jpeg .jpg .png .tiff .webp .svg 
-video|.webm .mkv .flv .ogg .gif .avi .wmv .mp4 .m4p .m4v 
-text|.txt .rtf .pdf .doc .docx 
-audio|.mp3 .flac .m4a .wma .aac .ec3 .flp .mtm .wav 
-archive|.zip .rar .7z .pkg .z 
-executables|.exe .apk .bat .bin .msi 
-code|.cpp .py .pyw .jar 

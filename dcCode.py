@@ -168,17 +168,20 @@ class Cleaner:
                 return name
 
     def convert_bytes(self, num):
+        """Возвращает вес в самой подходящей для него единице измерения информации"""
         for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
             if num < 1024.0:
                 return "%3.2f %s" % (num, x)
             num /= 1024.0
 
     def get_file_size(self, file_path):
+        """Возвращает вес файла по его пути"""
         if os.path.isfile(file_path):
             file_info = os.stat(file_path)
             return file_info.st_size
 
     def get_file_creation_time(self, file_path):
+        """Возвращает дату создания файла по его пути"""
         if os.path.isfile(file_path):
             c_time = os.path.getctime(file_path)
             dt_c = datetime.fromtimestamp(c_time)
@@ -212,7 +215,8 @@ class Cleaner:
                 if final_destination == "":
                     return None
         if os.path.exists(file_path) and os.path.exists(final_destination):
-            if self.get_file_type(file_path) not in exceptions:
+            if (self.get_file_type(file_path) not in exceptions and self.get_file_type(file_path) != None) or (
+                    (self.get_file_type(file_path) == None) and ("else" not in exceptions)):
                 try:
                     shutil.move(file_path, final_destination)
                     if make_log:
@@ -226,6 +230,7 @@ class Cleaner:
             return False
 
     def just_move(self):
+        """Функция переноса файлов из одной папки в другую без сортировки"""
         self.save_log("FolderMove")
         final_destination = list(self.return_simple_directories().values())[1]
         folder_path = list(self.return_simple_directories().values())[0]
@@ -244,6 +249,7 @@ class Cleaner:
                     return True
 
     def date_folder_move(self, file_path, date_type):
+        """Функция переноса папки для выбранного типа сортировки по дате"""
         files_list = []
         main_folder = ""
         first_folder = ""
@@ -270,7 +276,7 @@ class Cleaner:
             set_years = set(years)
             for year in list(set_years):
                 if not os.path.exists(fr"{first_folder}\{year}"):
-                    self.make_directory(year, first_folder)
+                    self.make_directory(first_folder, year)
             for file in files_list:
                 file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[0]}"
                 self.move_file(file, file_directory, make_log=True)
@@ -281,7 +287,7 @@ class Cleaner:
             set_months = set(months)
             for month in list(set_months):
                 if not os.path.exists(fr"{first_folder}\{month}"):
-                    self.make_directory(month, first_folder)
+                    self.make_directory(first_folder, month)
             for file in files_list:
                 file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[1]}"
                 self.move_file(file, file_directory, make_log=True)
@@ -292,7 +298,7 @@ class Cleaner:
             set_days = set(days)
             for day in list(set_days):
                 if not os.path.exists(fr"{first_folder}\{day}"):
-                    self.make_directory(day, first_folder)
+                    self.make_directory(first_folder, day)
             for file in files_list:
                 file_directory = fr"{first_folder}\{self.get_file_creation_time(file)[2]}"
                 self.move_file(file, file_directory, make_log=True)
@@ -427,6 +433,7 @@ class Cleaner:
                     break
 
     def update_simple_sort(self, dictionary, from_flag=False):
+        """Обновляет файл с простой сортировкой"""
         if not from_flag:
             with open("SimpleSortDirectories.txt", "w+", encoding="UTF-8") as output_file:
                 for i in range(len(list(dictionary.keys()))):
@@ -434,14 +441,14 @@ class Cleaner:
                     values = list(dictionary.values())
                     output_file.write(f"{keys[i]}|{values[i]}\n")
             simple_file_directories = {
-                'photo': fr"{list(simple_directories.values())[1]}\photos",
-                'video': fr"{list(simple_directories.values())[1]}\videos",
-                'text': fr"{list(simple_directories.values())[1]}\text",
-                'audio': fr"{list(simple_directories.values())[1]}\audios",
-                'archive': fr"{list(simple_directories.values())[1]}\archives",
-                'executable': fr"{list(simple_directories.values())[1]}\executables",
-                'code': fr"{list(simple_directories.values())[1]}\codes",
-                "else": fr"{list(simple_directories.values())[1]}\else"
+                'photo': fr"{values[1]}\photos",
+                'video': fr"{values[1]}\videos",
+                'text': fr"{values[1]}\text",
+                'audio': fr"{values[1]}\audios",
+                'archive': fr"{values[1]}\archives",
+                'executable': fr"{values[1]}\executables",
+                'code': fr"{values[1]}\codes",
+                "else": fr"{values[1]}\else"
             }
             with open("SimpleSortFileDirectories.txt", "w", encoding="UTF-8") as simple_output:
                 keys = list(simple_file_directories.keys())
@@ -463,21 +470,23 @@ class Cleaner:
                 output_file.write(f"{keys[i]}|{values[i]}\n")
 
     def return_file_directories(self):
-        """Выводит словарь директорий файлов"""
+        """Возвращает словарь директорий файлов"""
         return file_directories
 
     def return_file_types(self):
-        """Выводит словарь типов файлов"""
+        """Возвращает словарь типов файлов"""
         return file_types
 
     def return_simple_directories(self):
-        """Выводит словарь директорий для простой сортировки"""
+        """Возвращает словарь директорий для простой сортировки"""
         return simple_directories
 
     def return_simple_file_directories(self):
+        """Возвращает словарь директорий типов файлов простой сортировки"""
         return simple_sort_file_directories
 
     def return_preferences(self):
+        """Возвращает словарь с путями простой сортировки"""
         new_preferences = {}
         with open("Preferences.txt", "r", encoding="UTF-8") as simple_output:
             lines = simple_output.readlines()
@@ -534,6 +543,7 @@ class Cleaner:
                     break
 
     def reset_simple_sort(self):
+        """Сбрасывает файл с простым типом сортировки"""
         simple_directories = {
             "from": DESKTOP,
             "where": "SortedFiles"
@@ -559,7 +569,7 @@ class Cleaner:
             for i in range(len(keys)):
                 simple_output.write(f"{keys[i]}|{values[i]}\n")
 
-    def make_directory(self, directory_name, directory_path):
+    def make_directory(self, directory_path, directory_name):
         """Создает в указанном пути папку с определенным названием"""
         os.mkdir(fr"{directory_path}\{directory_name}")
 
@@ -570,6 +580,7 @@ class Cleaner:
             self.make_directory(where_directory, el)
 
     def make_user_preference(self, preference_dict):
+        """Сохраняет выбранные пользователем настройки"""
         with open("Preferences.txt", "w", encoding="UTF-8") as output_file:
             for i in range(len(list(preference_dict.keys()))):
                 keys = list(preference_dict.keys())
@@ -577,6 +588,7 @@ class Cleaner:
                 output_file.write(f"{keys[i]}|{values[i]}\n")
 
     def analyze_folder(self, folder_path, subfolder_flag=False):
+        """Функция для анализа папки, указанной пользователем"""
         files_with_size = []
         main_folder = ""
         flag = False

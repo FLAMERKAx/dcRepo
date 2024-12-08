@@ -2,9 +2,10 @@ import os
 import sys
 import traceback
 
-from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QPushButton, QFileDialog
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6 import uic, QtGui
+from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import QApplication, QFileDialog
+from PyQt6.QtWidgets import QMainWindow, QLabel, QPushButton
 
 from dcCode import Cleaner as dc
 
@@ -12,14 +13,16 @@ from dcCode import Cleaner as dc
 class DesktopCleaner(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("Main.ui", self)
+        uic.loadUi(r"Main.ui", self)
         self.initUI()
+        self.setWindowIcon(QtGui.QIcon(r"finicon.ico"))
         self.directories_button = QPushButton()
         self.types_button = QPushButton()
         self.directories_window = None
         self.types_window = None
         self.directories_window = DesktopDirectories()
         self.types_window = DesktopTypes()
+        self.help_window = DesktopHelp()
         self.dc = dc()
 
     def initUI(self):
@@ -27,24 +30,24 @@ class DesktopCleaner(QMainWindow):
         self.setWindowTitle('DesktopCleaner')
         self.directories_button.clicked.connect(self.open_directories_window)
         self.types_button.clicked.connect(self.open_types_window)
+        self.help_button.clicked.connect(self.open_help_window)
         self.clean_button.clicked.connect(self.clean)
         self.undo_button.clicked.connect(self.undo)
         self.analyze_button.clicked.connect(self.analyze)
         self.get_folder_button.clicked.connect(self.get_directory)
         self.delete_button.clicked.connect(self.delete)
-        # self.weight_checkbox.clicked.connect(self.weight_show_checkboxes)
-        self.without_sort_checkbox.clicked.connect(self.without_sort)
-        # self.date_checkbox.clicked.connect(self.date_show_checkboxes)
-        # self.file_type_checkbox.clicked.connect(self.type_sort_show_checkboxes)
-        # self.year_checkbox.clicked.connect(self.date_checkboxes)
-        # self.month_checkbox.clicked.connect(self.date_checkboxes)
-        # self.day_checkbox.clicked.connect(self.date_checkboxes)
+        self.weight_checkbox.stateChanged.connect(self.weight_show_checkboxes)
+        self.without_sort_checkbox.stateChanged.connect(self.without_sort)
+        self.date_checkbox.stateChanged.connect(self.date_show_checkboxes)
+        self.file_type_checkbox.stateChanged.connect(self.type_sort_show_checkboxes)
+        self.year_checkbox.stateChanged.connect(self.date_checkboxes)
+        self.month_checkbox.stateChanged.connect(self.date_checkboxes)
+        self.day_checkbox.stateChanged.connect(self.date_checkboxes)
         self.save_preferences.clicked.connect(self.save_preference)
         self.execute_preferences.clicked.connect(self.execute_pref)
 
     def clean(self):
         if self.file_type_checkbox.isChecked() and self.file_type_checkbox.isEnabled():
-            print(self.dc.return_simple_file_directories())
             exeption_dict = {
                 "photo": self.photo_checkbox.isChecked(),
                 "video": self.video_checkbox.isChecked(),
@@ -71,7 +74,6 @@ class DesktopCleaner(QMainWindow):
         elif self.without_sort_checkbox.isChecked() and self.without_sort_checkbox.isEnabled():
             self.dc.just_move()
         elif self.weight_checkbox.isChecked() and self.weight_checkbox.isEnabled():
-            print(int(self.weight_text.toPlainText()))
             self.dc.move_folder(list(self.dc.return_simple_directories().values())[0], sort_mode="weight",
                                 file_weight=int(self.weight_text.toPlainText()))
         elif self.date_checkbox.isChecked() and self.date_checkbox.isEnabled():
@@ -119,6 +121,13 @@ class DesktopCleaner(QMainWindow):
         else:
             self.types_window.raise_()
             self.types_window.activateWindow()
+
+    def open_help_window(self):
+        if self.help_window is None or not self.help_window.isVisible():
+            self.help_window.show()
+        else:
+            self.help_window.raise_()
+            self.help_window.activateWindow()
 
     def without_sort(self):
         if self.without_sort_checkbox.isChecked():
@@ -175,134 +184,128 @@ class DesktopCleaner(QMainWindow):
             else:
                 self.file_type_checkbox.setEnabled(True)
 
-    # def weight_show_checkboxes(self):
-    #     if self.weight_checkbox.isChecked():
-    #         self.date_checkbox.setChecked(False)
-    #         self.date_show_checkboxes()
-    #         self.file_type_checkbox.setChecked(False)
-    #         self.type_sort_show_checkboxes()
-    #         self.weight_text.setEnabled(True)
-    #         self.label_22.setEnabled(True)
-    #     else:
-    #         self.weight_text.setEnabled(False)
-    #         self.label_22.setEnabled(False)
-    #
-    # def date_checkboxes(self):
-    #     if not self.year_checkbox.isChecked():
-    #         self.month_checkbox.setChecked(False)
-    #         self.day_checkbox.setChecked(False)
-    #     if not self.month_checkbox.isChecked():
-    #         self.year_checkbox.setChecked(False)
-    #         self.day_checkbox.setChecked(False)
-    #     if not self.day_checkbox.isChecked():
-    #         self.year_checkbox.setChecked(False)
-    #         self.month_checkbox.setChecked(False)
-    #
-    # def date_show_checkboxes(self):
-    #     if self.date_checkbox.isChecked():
-    #         self.file_type_checkbox.setChecked(False)
-    #         self.type_sort_show_checkboxes()
-    #         self.weight_checkbox.setChecked(False)
-    #         self.weight_show_checkboxes()
-    #         self.year_checkbox.setEnabled(True)
-    #         self.month_checkbox.setEnabled(True)
-    #         self.day_checkbox.setEnabled(True)
-    #         self.label_23.setEnabled(True)
-    #     else:
-    #         self.year_checkbox.setEnabled(False)
-    #         self.month_checkbox.setEnabled(False)
-    #         self.day_checkbox.setEnabled(False)
-    #         self.label_23.setEnabled(False)
-    #
-    # def type_sort_show_checkboxes(self):
-    #     if self.file_type_checkbox.isChecked():
-    #         self.weight_checkbox.setChecked(False)
-    #         self.weight_show_checkboxes()
-    #         self.date_checkbox.setChecked(False)
-    #         self.date_show_checkboxes()
-    #         self.simple_checkbox.setEnabled(True)
-    #         self.label_4.setEnabled(True)
-    #         self.photo_checkbox.setEnabled(True)
-    #         self.video_checkbox.setEnabled(True)
-    #         self.text_checkbox.setEnabled(True)
-    #         self.audio_checkbox.setEnabled(True)
-    #         self.archive_checkbox.setEnabled(True)
-    #         self.executable_checkbox.setEnabled(True)
-    #         self.code_checkbox.setEnabled(True)
-    #         self.else_checkbox.setEnabled(True)
-    #         self.label_19.setEnabled(True)
-    #     else:
-    #         self.simple_checkbox.setEnabled(False)
-    #         self.label_4.setEnabled(False)
-    #         self.photo_checkbox.setEnabled(False)
-    #         self.video_checkbox.setEnabled(False)
-    #         self.text_checkbox.setEnabled(False)
-    #         self.audio_checkbox.setEnabled(False)
-    #         self.archive_checkbox.setEnabled(False)
-    #         self.executable_checkbox.setEnabled(False)
-    #         self.code_checkbox.setEnabled(False)
-    #         self.else_checkbox.setEnabled(False)
-    #         self.label_19.setEnabled(False)
+    def weight_show_checkboxes(self):
+        if self.weight_checkbox.isChecked():
+            self.date_checkbox.setChecked(False)
+            self.date_show_checkboxes()
+            self.file_type_checkbox.setChecked(False)
+            self.type_sort_show_checkboxes()
+            self.weight_text.setEnabled(True)
+            self.label_22.setEnabled(True)
+        else:
+            self.weight_text.setEnabled(False)
+            self.label_22.setEnabled(False)
+
+    def date_checkboxes(self):
+        if not self.year_checkbox.isChecked():
+            self.month_checkbox.setChecked(False)
+            self.day_checkbox.setChecked(False)
+        if not self.month_checkbox.isChecked():
+            self.year_checkbox.setChecked(False)
+            self.day_checkbox.setChecked(False)
+        if not self.day_checkbox.isChecked():
+            self.year_checkbox.setChecked(False)
+            self.month_checkbox.setChecked(False)
+
+    def date_show_checkboxes(self):
+        if self.date_checkbox.isChecked():
+            self.file_type_checkbox.setChecked(False)
+            self.type_sort_show_checkboxes()
+            self.weight_checkbox.setChecked(False)
+            self.weight_show_checkboxes()
+            self.year_checkbox.setEnabled(True)
+            self.month_checkbox.setEnabled(True)
+            self.day_checkbox.setEnabled(True)
+            self.label_23.setEnabled(True)
+        else:
+            self.year_checkbox.setEnabled(False)
+            self.month_checkbox.setEnabled(False)
+            self.day_checkbox.setEnabled(False)
+            self.label_23.setEnabled(False)
+
+    def type_sort_show_checkboxes(self):
+        if self.file_type_checkbox.isChecked():
+            self.weight_checkbox.setChecked(False)
+            self.weight_show_checkboxes()
+            self.date_checkbox.setChecked(False)
+            self.date_show_checkboxes()
+            self.simple_checkbox.setEnabled(True)
+            self.label_4.setEnabled(True)
+            self.photo_checkbox.setEnabled(True)
+            self.video_checkbox.setEnabled(True)
+            self.text_checkbox.setEnabled(True)
+            self.audio_checkbox.setEnabled(True)
+            self.archive_checkbox.setEnabled(True)
+            self.executable_checkbox.setEnabled(True)
+            self.code_checkbox.setEnabled(True)
+            self.else_checkbox.setEnabled(True)
+            self.label_19.setEnabled(True)
+        else:
+            self.simple_checkbox.setEnabled(False)
+            self.label_4.setEnabled(False)
+            self.photo_checkbox.setEnabled(False)
+            self.video_checkbox.setEnabled(False)
+            self.text_checkbox.setEnabled(False)
+            self.audio_checkbox.setEnabled(False)
+            self.archive_checkbox.setEnabled(False)
+            self.executable_checkbox.setEnabled(False)
+            self.code_checkbox.setEnabled(False)
+            self.else_checkbox.setEnabled(False)
+            self.label_19.setEnabled(False)
 
     def save_preference(self):
         pref_dict = {
-            "just_move": self.without_sort_checkbox.isChecked(),
-            "weight_sort": self.weight_checkbox.isChecked(),
-            "weight_text": int(self.weight_text.toPlainText()),
-            "date_sort": self.date_checkbox.isChecked(),
-            "year_date_sort": self.year_checkbox.isChecked(),
-            "month_date_sort": self.month_checkbox.isChecked(),
-            "day_date_sort": self.day_checkbox.isChecked(),
-            "type_sort": self.file_type_checkbox.isChecked(),
-            "simple_sort": self.simple_checkbox.isChecked(),
-            "photo": self.photo_checkbox.isChecked(),
-            "video": self.video_checkbox.isChecked(),
-            "text": self.text_checkbox.isChecked(),
-            "audio": self.audio_checkbox.isChecked(),
-            "archive": self.archive_checkbox.isChecked(),
-            "executable": self.executable_checkbox.isChecked(),
-            "code": self.code_checkbox.isChecked(),
-            "else": self.else_checkbox.isChecked(),
+            "just_move": 1 if self.without_sort_checkbox.isChecked() else 0,
+            "weight_sort": 1 if self.weight_checkbox.isChecked() else 0,
+            "weight_text": self.weight_text.toPlainText(),
+            "date_sort": 1 if self.date_checkbox.isChecked() else 0,
+            "year_date_sort": 1 if self.year_checkbox.isChecked() else 0,
+            "month_date_sort": 1 if self.month_checkbox.isChecked() else 0,
+            "day_date_sort": 1 if self.day_checkbox.isChecked() else 0,
+            "type_sort": 1 if self.file_type_checkbox.isChecked() else 0,
+            "simple_sort": 1 if self.simple_checkbox.isChecked() else 0,
+            "photo": 1 if self.photo_checkbox.isChecked() else 0,
+            "video": 1 if self.video_checkbox.isChecked() else 0,
+            "text": 1 if self.text_checkbox.isChecked() else 0,
+            "audio": 1 if self.audio_checkbox.isChecked() else 0,
+            "archive": 1 if self.archive_checkbox.isChecked() else 0,
+            "executable": 1 if self.executable_checkbox.isChecked() else 0,
+            "code": 1 if self.code_checkbox.isChecked() else 0,
+            "else": 1 if self.else_checkbox.isChecked() else 0,
         }
         self.dc.make_user_preference(pref_dict)
 
     def execute_pref(self):
         pref_dict = list(self.dc.return_preferences().values())
-        print(pref_dict)
-        self.without_sort_checkbox.setChecked(bool(pref_dict[0]))
-        self.weight_checkbox.setChecked(bool(pref_dict[1]))
+        self.without_sort_checkbox.setChecked(bool(int(pref_dict[0])))
+        self.weight_checkbox.setChecked(bool(int(pref_dict[1])))
         self.weight_text.setPlainText(pref_dict[2])
-        self.date_checkbox.setChecked(bool(pref_dict[3]))
-        self.year_checkbox.setChecked(bool(pref_dict[4]))
-        self.month_checkbox.setChecked(bool(pref_dict[5]))
-        self.day_checkbox.setChecked(bool(pref_dict[6]))
-        self.file_type_checkbox.setChecked(bool(pref_dict[7]))
-        self.simple_checkbox.setChecked(bool(pref_dict[8]))
-        self.photo_checkbox.setChecked(bool(pref_dict[9]))
-        self.video_checkbox.setChecked(bool(pref_dict[10]))
-        self.text_checkbox.setChecked(bool(pref_dict[11]))
-        self.audio_checkbox.setChecked(bool(pref_dict[12]))
-        self.archive_checkbox.setChecked(bool(pref_dict[13]))
-        self.executable_checkbox.setChecked(bool(pref_dict[14]))
-        self.code_checkbox.setChecked(bool(pref_dict[15]))
-        self.else_checkbox.setChecked(bool(pref_dict[16]))
+        self.date_checkbox.setChecked(bool(int(pref_dict[3])))
+        self.year_checkbox.setChecked(bool(int(pref_dict[4])))
+        self.month_checkbox.setChecked(bool(int(pref_dict[5])))
+        self.day_checkbox.setChecked(bool(int(pref_dict[6])))
+        self.file_type_checkbox.setChecked(bool(int(pref_dict[7])))
+        self.simple_checkbox.setChecked(bool(int(pref_dict[8])))
+        self.photo_checkbox.setChecked(bool(int(pref_dict[9])))
+        self.video_checkbox.setChecked(bool(int(pref_dict[10])))
+        self.text_checkbox.setChecked(bool(int(pref_dict[11])))
+        self.audio_checkbox.setChecked(bool(int(pref_dict[12])))
+        self.archive_checkbox.setChecked(bool(int(pref_dict[13])))
+        self.executable_checkbox.setChecked(bool(int(pref_dict[14])))
+        self.code_checkbox.setChecked(bool(int(pref_dict[15])))
+        self.else_checkbox.setChecked(bool(int(pref_dict[16])))
 
     def closeEvent(self, event):
         self.directories_window.close()
         self.types_window.close()
-
-
-class DesktopProgressBar(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        uic.loadUi("ProgressBar.ui", self)
-        self.dc = dc()
+        self.help_window.close()
 
 
 class DesktopDirectories(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("Directories.ui", self)
+        uic.loadUi(r"Directories.ui", self)
+        self.setWindowIcon(QtGui.QIcon(r"finicon.ico"))
         self.dc = dc()
         self.confirm_label.hide()
         self.initUI()
@@ -459,8 +462,9 @@ class DesktopDirectories(QMainWindow):
 class DesktopTypes(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("FileType.ui", self)
+        uic.loadUi(r"FileType.ui", self)
         self.initUI()
+        self.setWindowIcon(QtGui.QIcon(r"finicon.ico"))
         self.dc = dc()
 
     def initUI(self):
@@ -510,6 +514,54 @@ class DesktopTypes(QMainWindow):
             self.archive_text.setPlainText(self.format_extensions(keys[4]))
             self.executable_text.setPlainText(self.format_extensions(keys[5]))
             self.code_text.setPlainText(self.format_extensions(keys[6]))
+
+
+class DesktopHelp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        self.current_page = 1
+        self.setWindowIcon(QtGui.QIcon(r"finicon.ico"))
+
+    def initUI(self):
+        self.setFixedSize(540, 540)
+        self.setWindowTitle('dcHelp')
+        self.pixmap = QPixmap(r"help_resize.png")
+        self.image = QLabel(self)
+        self.image.move(0, 0)
+        self.image.resize(6480, 540)
+        self.image.setPixmap(self.pixmap)
+
+        self.right_button = QPushButton(self)
+        self.right_button.resize(108, 27)
+        self.right_button.move(427, 508)
+        self.right_button.setText("След. Страница")
+        self.right_button.clicked.connect(self.change_page_right)
+
+        self.left_button = QPushButton(self)
+        self.left_button.resize(108, 27)
+        self.left_button.move(5, 508)
+        self.left_button.setText("След. Страница")
+        self.left_button.clicked.connect(self.change_page_left)
+
+    def change_page_right(self):
+        self.image.move((self.current_page * (-540)), 0)
+        if self.current_page < 11:
+            self.current_page += 1
+        else:
+            self.current_page = 0
+            self.image.move((self.current_page * (-540)), 0)
+
+    def change_page_left(self):
+        if self.current_page != 0:
+            self.current_page -= 1
+        else:
+            self.current_page = 12
+        if self.current_page != 0:
+            self.image.move((self.current_page * (-540)) + 540, 0)
+        else:
+            self.current_page = 11
+            self.image.move((self.current_page * (-540)), 0)
 
 
 def excepthook(exc_type, exc_value, exc_tb):

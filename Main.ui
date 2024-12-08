@@ -514,7 +514,7 @@ rgb(108, 108, 108)</string>
      </font>
     </property>
     <property name="text">
-     <string>ver: 0.727</string>
+     <string>ver: 1.0</string>
     </property>
    </widget>
    <widget class="QPushButton" name="directories_button">
@@ -1365,6 +1365,7 @@ rgb(108, 108, 108)</string>
     <property name="font">
      <font>
       <family>Calibri</family>
+      <pointsize>7</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -1396,19 +1397,6 @@ rgb(108, 108, 108)</string>
     <property name="text">
      <string>Сохранить
 настройку</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="preferences_number">
-    <property name="geometry">
-     <rect>
-      <x>21</x>
-      <y>640</y>
-      <width>51</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>1</number>
     </property>
    </widget>
    <widget class="QCheckBox" name="without_sort_checkbox">
@@ -1459,6 +1447,30 @@ rgb(108, 108, 108)</string>
 из простой сортировки</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="help_button">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>10</y>
+      <width>301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>36</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string>ПОМОЩЬ</string>
+    </property>
+   </widget>
    <zorder>line_4</zorder>
    <zorder>label</zorder>
    <zorder>line</zorder>
@@ -1504,9 +1516,9 @@ rgb(108, 108, 108)</string>
    <zorder>label_20</zorder>
    <zorder>execute_preferences</zorder>
    <zorder>save_preferences</zorder>
-   <zorder>preferences_number</zorder>
    <zorder>without_sort_checkbox</zorder>
    <zorder>label_25</zorder>
+   <zorder>help_button</zorder>
   </widget>
  </widget>
  <resources/>
