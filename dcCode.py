@@ -4,6 +4,9 @@ from datetime import datetime
 
 DESKTOP = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
 
+if not os.path.exists("logs.txt"):
+    with open("logs.txt", "w", encoding="UTF-8") as output:
+        pass
 preferences = {}
 if not os.path.exists("Preferences.txt"):
     preferences = {
@@ -410,7 +413,6 @@ class Cleaner:
             new_logs = []
             for i in logs[:len(logs) - counter]:
                 new_logs.append(f"{i}")
-            print(new_logs)
         with open("logs.txt", "w", encoding="UTF-8") as output:
             for i in new_logs:
                 output.write(i)
@@ -418,6 +420,8 @@ class Cleaner:
 
     def update_file_types(self, types_dictionary):
         """Обновляет словарь типов файла по запросу пользователя"""
+        global file_types
+        file_types = types_dictionary
         with open("FileTypes.txt", "w", encoding="UTF-8") as output_file:
             values = list(types_dictionary.values())
             keys = list(types_dictionary.keys())
@@ -434,12 +438,17 @@ class Cleaner:
 
     def update_simple_sort(self, dictionary, from_flag=False):
         """Обновляет файл с простой сортировкой"""
+        global simple_sort_file_directories, simple_directories
         if not from_flag:
             with open("SimpleSortDirectories.txt", "w+", encoding="UTF-8") as output_file:
                 for i in range(len(list(dictionary.keys()))):
                     keys = list(dictionary.keys())
                     values = list(dictionary.values())
                     output_file.write(f"{keys[i]}|{values[i]}\n")
+            simple_directories = {
+                "from": values[0],
+                "where": values[1],
+            }
             simple_file_directories = {
                 'photo': fr"{values[1]}\photos",
                 'video': fr"{values[1]}\videos",
@@ -450,6 +459,7 @@ class Cleaner:
                 'code': fr"{values[1]}\codes",
                 "else": fr"{values[1]}\else"
             }
+            simple_sort_file_directories = simple_file_directories
             with open("SimpleSortFileDirectories.txt", "w", encoding="UTF-8") as simple_output:
                 keys = list(simple_file_directories.keys())
                 values = list(simple_file_directories.values())
@@ -460,13 +470,19 @@ class Cleaner:
             with open("SimpleSortDirectories.txt", "w", encoding="UTF-8") as output_file:
                 from_folder = f"from|{dictionary}"
                 output_file.write(f"{from_folder}\n{where}\n")
+                simple_directories = {
+                    "from": f"from|{dictionary}",
+                    "where": where,
+                }
 
     def update_file_directories(self, directories_dictionary):
         """Обновляет словарь директорий файлов по запросу пользователя"""
+        global file_directories
         with open("FileDirectories.txt", "w", encoding="UTF-8") as output_file:
             for i in range(len(list(directories_dictionary.keys()))):
                 keys = list(directories_dictionary.keys())
                 values = list(directories_dictionary.values())
+                file_directories[keys[i]] = values[i]
                 output_file.write(f"{keys[i]}|{values[i]}\n")
 
     def return_file_directories(self):
@@ -624,6 +640,5 @@ class Cleaner:
         executable = folder_file_types.count("executable")
         code = folder_file_types.count("code")
         else1 = folder_file_types.count(None)
-        print(folder_file_types)
         return [folder_path, len(files_with_size), self.convert_bytes(folder_size),
                 photo, video, text, audio, archive, executable, code, else1]

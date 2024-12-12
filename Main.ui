@@ -514,7 +514,7 @@ rgb(108, 108, 108)</string>
      </font>
     </property>
     <property name="text">
-     <string>ver: 1.0</string>
+     <string>ver: 1.01</string>
     </property>
    </widget>
    <widget class="QPushButton" name="directories_button">
